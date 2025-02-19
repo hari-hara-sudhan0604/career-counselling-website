@@ -35,7 +35,7 @@ bcrypt = Bcrypt(app)
 # Email configuration
 EMAIL_ADDRESS = 'futureforge06@gmail.com'
 EMAIL_PASSWORD = 'hxqd hppo ejty pfsz'  # Use Gmail app password
-os.environ["GROQ_API_KEY"] = "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"
+os.environ["GROQ_API_KEY"] = "__paste your api here__"
 
 
 
