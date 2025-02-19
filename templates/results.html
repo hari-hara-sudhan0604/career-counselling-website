@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(to bottom, #ffecd2, #fcb69f);
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .highlight {
+            color: #ff6f61;
+            font-weight: bold;
+        }
+        #background-graphics {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: url('https://source.unsplash.com/random/1920x1080') no-repeat center center/cover;
+            opacity: 0.3;
+        }
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Graphics -->
+    <div id="background-graphics"></div>
+
+    <!-- Confetti Canvas -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Main Content -->
+    <div class="container text-center">
+        <!-- Quiz Results Section -->
+        <h1>🎉 Your Quiz Results 🎉</h1>
+        <p class="mt-4">You scored <span class="highlight">{{ score }}</span> out of <span class="highlight">{{ total }}</span>10</p>
+
+        <!-- Personality Assessment Promo Section -->
+        <div class="alert alert-info mt-4" role="alert">
+            Did you know? We also offer a <strong>Personality Assessment</strong> to help you understand your unique traits and align them with your career goals!
+        </div>
+
+        <a href="/personality-assessment" class="btn btn-primary mt-3">Take Personality Assessment</a>
+
+        <!-- Navigation Section -->
+        <div class="mt-5">
+            <a href="/" class="btn btn-secondary">Back to Home</a>
+        </div>
+    </div>
+
+    <script>
+        // Confetti Animation
+        const confettiCanvas = document.getElementById('confetti-canvas');
+        const ctx = confettiCanvas.getContext('2d');
+        confettiCanvas.width = window.innerWidth;
+        confettiCanvas.height = window.innerHeight;
+
+        const confettiPieces = Array.from({ length: 150 }, () => ({
+            x: Math.random() * confettiCanvas.width,
+            y: Math.random() * confettiCanvas.height - confettiCanvas.height,
+            color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+            size: Math.random() * 6 + 4,
+            speed: Math.random() * 3 + 1,
+            rotation: Math.random() * 360,
+        }));
+
+        function drawConfetti() {
+            ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+            confettiPieces.forEach(piece => {
+                ctx.fillStyle = piece.color;
+                ctx.beginPath();
+                ctx.arc(piece.x, piece.y, piece.size, 0, Math.PI * 2);
+                ctx.fill();
+                piece.y += piece.speed;
+                piece.rotation += 5;
+                if (piece.y > confettiCanvas.height) piece.y = 0 - piece.size;
+            });
+            requestAnimationFrame(drawConfetti);
+        }
+
+        drawConfetti();
+    </script>
+</body>
+</html>

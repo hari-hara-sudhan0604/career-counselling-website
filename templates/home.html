@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future Forge - Home</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/toggle.css">
+
+
+    <style>
+      
+        body {
+            font-family: "Roboto", sans-serif;
+            font-weight: 300;
+            color: #333;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding-top: 150px;
+           
+            
+        }
+    
+        header {
+            background: #CAD2F6;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 8;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 10px 40px;
+        }
+       /* Increase the size of the grade buttons */
+.dropdown-container .btn {
+  background-color: #f0b0cb;
+ border-color: black;
+    font-weight: bold;
+    border-radius: 25px;
+    margin-top: -70px; /* Adjust this value as needed */
+    padding: 12px 30px; /* Increased padding for larger buttons */
+    font-size: 18px; /* Increased font size */
+}
+
+/* Enable hover effect for dropdowns */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* Adjust dropdown menu for smooth appearance */
+.dropdown-menu {
+    margin-top: -18px;
+}
+
+
+        .icon-link {
+            text-decoration: none;
+            font-size: 1.5rem;
+            color: #007bff;
+            transition: color 0.3s;
+            cursor: pointer;
+            margin: 0 10px;
+            color: #333;
+        }
+
+        .icon-link:hover {
+            color: #691d55;
+        }
+        .small {
+    font-size: 0.9rem;
+    cursor: pointer; /* Ensure cursor is a hand on hover */
+}
+
+        .logo {
+            height: 120px;
+            width: 260px;
+        }
+
+        .scalable-text {
+            font-size: 1rem;
+        }
+       
+         /* Custom CSS for Card Animation */
+    .card-container {
+      margin: 50px auto;
+      display: flex; /* Use flexbox to align cards in a row */
+      justify-content: space-between; /* Space out the cards evenly */
+    }
+
+    .animated-card {
+      width: 18%; /* Adjust width so all 5 cards fit in one line */
+      height: 100px; /* Adjust height */
+      background: linear-gradient(45deg, #a8629e, #72a3af);
+      background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+     
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      position: relative;
+      transform: translateY(100px);
+      opacity: 0;
+      animation: slide-in 0.8s ease forwards;
+    }
+
+    /* Add staggered animation */
+    .animated-card:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    .animated-card:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+    .animated-card:nth-child(4) {
+      animation-delay: 0.6s;
+    }
+    .animated-card:nth-child(5) {
+      animation-delay: 0.8s;
+    }
+
+    /* Card hover effect */
+    .animated-card:hover {
+      transform: scale(1.1) translateY(0);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Card content */
+    .card-content {
+      color: white;
+      text-align: center;
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      opacity: 0;
+      opacity: 1;
+      transform: translateY(30px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+   
+    /* Slide-in animation */
+    @keyframes slide-in {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+       /* Heading Animation */
+       .animated-heading {
+            font-size: 3rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            color: #333;
+            animation: fadeZoomIn 2s ease-in-out;
+        }
+
+        @keyframes fadeZoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Slideshow container */
+        .slideshow-container {
+            position: relative;
+            margin: auto;
+            max-width: 80%;
+            overflow: hidden;
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        /* Slides */
+        .slide {
+            display: none;
+            font-size: 1.5rem;
+            color: #0f0d0d;
+            padding: 20px;
+            animation: fade 1s ease-in-out;
+        }
+
+        /* Fade animation */
+        @keyframes fade {
+            from {
+                opacity: 0.4;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Active slide */
+        .active {
+            display: block;
+        }
+        
+        .container2 {
+          background-color: #f8f9fa;
+    font-family: 'Comic Sans MS', 'Comic Sans', cursive; /* Childish and fun font */
+    text-align: center; /* Align text to center */
+    color: #333; /* Default text color */
+    padding: 20px;
+}
+
+.container2 h3,
+.container2 h1 {
+    font-family: 'Chalkboard', 'Comic Sans MS', cursive; /* Playful font for headings */
+    color: #ff5722; /* Eye-catching heading color */
+    margin-bottom: 15px;
+}
+
+.container2 p {
+    font-size: 18px; /* Slightly larger, readable font size */
+    line-height: 1.6; /* Better spacing between lines */
+    margin-bottom: 10px;
+}
+
+.container2 a.email {
+    font-weight: bold;
+    color: #1e88e5; /* Bright, attractive email link color */
+    text-decoration: none;
+}
+
+.container2 a.email:hover {
+    text-decoration: underline;
+    color: #1565c0; /* Darker blue on hover for emphasis */
+}
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        footer {
+            background: linear-gradient(to right, #a8629e, #72a3af);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+        .main-container {
+          background-image: url('/static/ok2[1].jpg'); 
+    background-size: cover; 
+     
+    background-repeat: no-repeat; 
+    
+        }
+  /* Responsive tweaks for small screens */
+/* Responsive tweaks for small screens */
+@media (max-width: 767px) {
+    .main-container {
+        padding: 20px;
+    }
+
+    /* Adjust header elements for mobile screens */
+    header {
+        flex-direction: column;
+        padding: 15px;
+        align-items: flex-start;
+    }
+
+    /* Adjust logo size for small screens */
+    .logo {
+        height: 50px;
+    }
+
+    /* Stack the navigation icons vertically */
+    .dropdown-container .btn {
+        padding: 10px 18px;
+        font-size: 14px; /* Adjust button size for small screens */
+    }
+
+    /* Stack icon links vertically */
+    .icon-link {
+        margin: 10px 0;
+    }
+
+    .card-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .animated-card {
+        width: 80%; /* Full width cards on small screens */
+    }
+}
+#one
+{
+  background-image: linear-gradient(-60deg, #ff5858 0%, #f09819 100%);
+}
+    </style>
+     <script type="text/javascript">
+      function googleTranslateElementInit() {
+          new google.translate.TranslateElement({ pageLanguage: 'en' ,
+            includedLanguages: 'hi,ta,te,kn,ml,mr,bn,gu,pa,or'
+          }, 'google_translate_element');
+      }
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</head>
+
+<body>
+  <div class="menu-container">
+  <!-- Hamburger Button -->
+  <button class="hamburger">☰</button>
+
+  <!-- Overlay -->
+  <div class="overlay"></div>
+
+  <!-- Dropdown Menu -->
+  <nav class="menu">
+    <ul>
+      <li><a href="/profile">Go to Profile</a></li>
+      <li><a href="/home">Home</a></li>
+      <li><a href="/logout">Logout</a></li>
+    </ul>
+  </nav>
+</div>
+<div id="google_translate_element"></div>
+    <header class="d-flex align-items-center justify-content-between flex-wrap">
+     
+        <!-- Logo -->
+        <img src="/static/logoo.png" class="logo" alt="logo">
+ 
+<div class="d-flex align-items-center justify-content-center gap-1 my-4">
+  
+  
+  
+</div>
+<!-- Text size controls -->
+<div class="d-flex align-items-center justify-content-center gap-1 my-4">
+  <div class="home"></div>
+  
+</div>
+</header>
+<div class="main-container">
+  <main>
+    <div class="text-center my-0">
+      <h1 class="animated-heading">Welcome to Future Forge</h1>
+    </div>
+
+    <div class="slideshow-container">
+      <!--<div class="slide active">Empowering Minds</div>
+      <div class="slide">Building Futures</div>
+      <div class="slide">Connecting Students and Mentors</div>
+      <div class="slide">Innovating Education</div>-->
+    </div>
+  </main>
+
+  <div class="container mt-6 pt-5 scalable-text">
+    <div class="dropdown-container d-flex justify-content-center gap-3" style="padding-top: 250px;">
+      <!-- Grade 6-8 Dropdown -->
+      <div class="dropdown">
+        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="one">
+         <span class="text-white">Grade 6-8</span> 
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="{{ url_for('assessment') }}">Assessment</a></li>
+          <li><a class="dropdown-item" href="{{ url_for('exams') }}">Exams</a></li>
+        </ul>
+      </div>
+
+      <!-- Grade 9-10 Dropdown -->
+      <div class="dropdown">
+        <button class="btn dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false" id="one">
+          <span class="text-white">Grade 9-10</span> 
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="{{ url_for('groups') }}">Groups</a></li>
+          <li><a class="dropdown-item" href="{{ url_for('diploma') }}">Diploma</a></li>
+        </ul>
+      </div>
+
+      <!-- Grade 11-12 Dropdown -->
+      <div class="dropdown">
+        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="one" >
+          <span class="text-white">Grade 11-12</span> 
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="{{ url_for('category_list') }}">Courses</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <div class="card-container">
+                <!-- Card 1 -->
+        <a href="{{ url_for('diploma') }}" class="animated-card">
+          <div class="card-content">
+            <h3>Diplomo</h3>
+            <p>diplomo courses for next career option</p>
+          </div>
+        </a>
+        <!-- Card 2 -->
+        <a href="{{ url_for('skillcourses') }}" class="animated-card">
+          <div class="card-content">
+            <h3>Skillcourses</h3>
+            <p>work related courses apart from the studies</p>
+          </div>
+        </a>
+        <!-- Card 3-->
+        <a href="{{ url_for('mentorpage') }}" class="animated-card">
+          <div class="card-content">
+            <h3>Mentors</h3>
+            <p>Mentors for advicing and travelling with your goals</p>
+          </div>
+        </a>
+        <!-- Card 4-->
+        <a href="{{ url_for('lifecoach') }}" class="animated-card">
+          <div class="card-content">
+            <h3>Lifecoach</h3>
+            <p>A life coach supports in improving their well-being.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="container2 mt-3">
+      <h3 class="text-center">Why Choose Future Forge?</h3>
+      <p><strong>Tailored Career Guidance:</strong> Every student is unique, and so is our approach. We provide personalized recommendations that align with your goals and aspirations.</p>
+      <p><strong>Aligned with NEP 2020:</strong> Supporting India’s National Education Policy, Future Forge focuses on holistic development and exposure to diverse career opportunities.</p>
+      <p><strong>Explore Beyond the Usual:</strong> From conventional professions to vocational and emerging fields, we help you discover what truly resonates with you.</p>
+      <p><strong>AI-Driven Assessments:</strong> Our intelligent algorithms analyze your strengths and interests to suggest careers that fit you best.</p>
+      <p><strong>Expert Mentorship:</strong> Learn from industry leaders who guide you through your journey, helping you make informed career choices.</p>
+  </div>
+    <div class="container2 mt-3">
+      <h1>About Us</h1>
+      <p>We are a team of 6 professionals dedicated to helping you discover your career and make your life easier.</p>
+      <p>For further enquiries, feel free to reach out to us at:</p>
+      <p class="contact">
+          <a href="mailto:futureforge06@gmail.com" class="email">FutureForge06@gmail.com</a>
+      </p>
+  </div>
+  <br><br><br>
+  
+<!--<a href="https://onlinecourses.swayam2.ac.in/cec25_as01/preview">swayam</a> -->   <!-- Footer Section -->
+    <footer>
+        <p>Future Forge | futureforge06@gmail.com</p>
+    </footer>
+   
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        let baseFontSize = 16; // Default font size in pixels
+        let speechSynthesis = window.speechSynthesis; // Speech API
+        let utterance;
+        let isReading = false; // Flag to track reading state
+
+        // Increase or decrease font size by a given amount
+        function changeFontSize(change) {
+            baseFontSize += change;
+            document.body.style.fontSize = ${baseFontSize}px;
+        }
+
+        // Reset font size to default
+        function resetFontSize() {
+            baseFontSize = 16;
+            document.body.style.fontSize = ${baseFontSize}px;
+        }
+
+        // Toggle screen reader functionality
+        function toggleScreenReader() {
+            const button = document.getElementById('screenReaderButton');
+            if (isReading) {
+                // Stop reading
+                if (speechSynthesis.speaking) {
+                    speechSynthesis.cancel();
+                   
+                }
+            } else {
+                // Start reading
+                utterance = new SpeechSynthesisUtterance(document.body.textContent);
+                speechSynthesis.speak(utterance);
+                
+            }
+            isReading = !isReading;
+        }
+        let slideIndex = 0;
+
+function showSlides() {
+    const slides = document.querySelectorAll(".slide");
+    slides.forEach((slide) => (slide.style.display = "none")); // Hide all slides
+    slideIndex++;
+    if (slideIndex > slides.length) slideIndex = 1; // Reset to first slide
+    slides[slideIndex - 1].style.display = "block"; // Show current slide
+    setTimeout(showSlides, 3000); // Change slide every 3 seconds
+}
+
+document.addEventListener("DOMContentLoaded", showSlides); // Start slideshow on page load
+    </script>
+    <script src="/static/toggle.js"></script>
+
+</body>
+</html>

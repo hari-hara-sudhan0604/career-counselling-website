@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeCoach Login</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f1f1f1;
+            text-align: center;
+            margin-top: 200px;
+        }
+
+        .login-container {
+            margin-top: 50px;
+            background: white;
+            padding: 30px;
+            width: 350px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin: auto;
+        }
+
+        h2 {
+            color: black;
+        }
+
+        .input-container {
+            display: flex;
+            align-items: center;
+            background: #f1f1f1;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+
+        .input-container img {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+
+        .input-container input {
+            border: none;
+            outline: none;
+            background: transparent;
+            flex: 1;
+            font-size: 14px;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #4285f4;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .login-btn:hover {
+            background-color: #357ae8;
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .options a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+
+        .options a:hover {
+            text-decoration: underline;
+        }
+
+        .register-link {
+            font-size: 14px;
+            margin-top: 20px;
+            color: black;
+        }
+
+        .register-link a {
+            color: #1a73e8;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        .home-link {
+            margin-top: 10px;
+        }
+
+        .home-link a {
+            color: black;
+            text-decoration: none;
+        }
+
+        .home-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>LifeCoach Login</h2>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                  <p class="{{ category }}">{{ message }}</p>
+                {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="/lifecoachlogin">
+            <div class="input-container">
+                <img src="https://cdn-icons-png.flaticon.com/512/3178/3178285.png" alt="Email Icon">
+                <input type="email" id="email" name="email" placeholder="Email" required>
+            </div>
+
+            <div class="input-container">
+                <img src="https://cdn-icons-png.flaticon.com/512/2913/2913101.png" alt="Lock Icon">
+                <input type="password" id="password" name="password" placeholder="Password" required>
+            </div>
+
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+
+        <div class="options">
+            <label><input type="checkbox"> Remember me?</label>
+            <a href="#">Forgot Password</a>
+        </div>
+
+        <div class="register-link">
+            Don't have an account? <a href="/lifecoachregister">REGISTER HERE</a>
+        </div>
+
+        <div class="home-link">
+            <a href="/">Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

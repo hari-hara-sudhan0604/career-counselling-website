@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Mentors</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://source.unsplash.com/random/1920x1080?education') no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        .btn {
+            margin-right: 5px;
+        }
+        .btn-primary {
+            background-color: #5bc0de;
+            border-color: #46b8da;
+        }
+        .btn-primary:hover {
+            background-color: #31b0d5;
+            border-color: #269abc;
+        }
+        .btn-danger {
+            background-color: #d9534f;
+            border-color: #d43f3a;
+        }
+        .btn-danger:hover {
+            background-color: #c9302c;
+            border-color: #ac2925;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="content">
+        <div class="container">
+            <h1 class="text-center mb-4">Coaches Details</h1>
+            <div class="d-flex justify-content-end mb-3">
+                <a href="/add_coach" class="btn btn-success">Add Coach</a>
+                <a href="/dashboard" class="btn btn-primary">Back to Dashboard</a>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Age</th>
+                            <th>Gender</th>
+                            <th>Qualification</th>
+                            <th>Years of Experience</th>
+                            <th>Field of Work</th>
+                            <th>Biography</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for coach in coaches %}
+                        <tr>
+                            <td>{{ coach['firstname'] }}</td>
+                            <td>{{ coach['lastname'] }}</td>
+                            <td>{{ coach['email'] }}</td>
+                            <td>{{ coach['age'] }}</td>
+                            <td>{{ coach['gender'] }}</td>
+                            <td>{{ coach['qualification'] }}</td>
+                            <td>{{ coach['years_of_experience'] }}</td>
+                            <td>{{ coach['field_of_work'] }}</td>
+                            <td>{{ coach['biography'] }}</td>
+                            <td>
+                                <div class="d-flex">
+                                    <form method="POST" action="/delete_coach/{{ coach['coach_id'] }}">
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                    <form method="POST" action="/approve_coach/{{ coach['coach_id'] }}">
+                                        <button type="submit" class="btn btn-primary">
+                                            {{ 'Approved' if coach['is_approved'] else 'Approve' }}
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

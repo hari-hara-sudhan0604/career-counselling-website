@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Approved Mentors</title>
+    
+    <!-- Bootstrap & FontAwesome -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <style>
+        /* Elegant Gradient Background */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: black;
+            background: whitesmoke; /* Dark blue gradient */
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Particle Background */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        /* Header Styling with Blinking Effect */
+        .header {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-top: 50px;
+            text-transform: uppercase;
+            color: #fff;
+            animation: blinkHeader 2s ease-in-out infinite alternate;
+        }
+
+        /* Header Animation */
+        @keyframes blinkHeader {
+            0% { text-shadow: 0 0 15px #afaeab, 0 0 30px #121111; }
+            100% { text-shadow: 0 0 5px #161616, 0 0 20px #140f0f; }
+        }
+
+        /* Stylish Table Container */
+        .table-container {
+            margin: 40px auto;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(12px);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            animation: fadeIn 2s ease-in-out;
+            width: 1500px;
+        }
+
+        /* Table Styling */
+        .table {
+            color: white;
+            border-radius: 10px;
+        }
+
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        /* Stylish Buttons */
+        .btn {
+            transition: all 0.3s ease-in-out;
+            border-radius: 50px;
+            font-weight: bold;
+        }
+
+        .btn-success {
+            background: #28a745;
+            border: none;
+            color: white;
+        }
+
+        .btn-warning {
+            background: #ffc107;
+            border: none;
+            color: white;
+        }
+
+        .btn-primary {
+            background: #007bff;
+            border: none;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+        }
+
+        /* Footer Styling */
+        .footer {
+            padding: 15px;
+            text-align: center;
+            background: linear-gradient(to right, #a8629e, #72a3af);
+            backdrop-filter: blur(12px);
+            font-size: 1rem;
+            font-weight: bold;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Fade-in Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Particle Background -->
+    
+
+    <!-- Header -->
+    <div class="header">Approved Mentors</div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="table-container">
+            <table class="table table-striped table-bordered text-center align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Qualification</th>
+                        <th>Years of Experience</th>
+                        <th>Field of Work</th>
+                        <th>Biography</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for mentor in approved_mentors %}
+                    <tr>
+                        <td>{{ mentor['firstname'] }}</td>
+                        <td>{{ mentor['lastname'] }}</td>
+                        <td>{{ mentor['email'] }}</td>
+                        <td>{{ mentor['age'] }}</td>
+                        <td>{{ mentor['gender'] }}</td>
+                        <td>{{ mentor['qualification'] }}</td>
+                        <td>{{ mentor['years_of_experience'] }}</td>
+                        <td>{{ mentor['field_of_work'] }}</td>
+                        <td>{{ mentor['biography'] }}</td>
+                        <td>
+                            <form action="/connect" method="post">
+                                <input type="hidden" name="mentor_id" value="{{ mentor['mentor_id'] }}">
+                                {% if mentor['connection_status'] == 'connect' %}
+                                    <button type="submit" class="btn btn-success btn-sm"><i class="fas fa-user-plus"></i> Connect</button>
+                                {% elif mentor['connection_status'] == 'pending' %}
+                                    <button type="button" class="btn btn-warning btn-sm" disabled><i class="fas fa-clock"></i> Requested</button>
+                                {% elif mentor['connection_status'] == 'connected' %}
+                                    <button type="button" class="btn btn-primary btn-sm" disabled><i class="fas fa-user-check"></i> Connected</button>
+                                {% endif %}
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="d-flex justify-content-center my-4">
+            <a href="/home" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to Home</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <span>© 2025 Future Fordge. All rights reserved.</span>
+    </div>
+
+    <!-- Particles.js Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 120 },
+                "size": { "value": 5 },
+                "color": { "value": "#ffffff" },
+                "opacity": { "value": 0.5 },
+                "move": { "speed": 3 }
+            }
+        });
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

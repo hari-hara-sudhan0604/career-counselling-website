@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Connections</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Body Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Background Styling */
+        #particles-js {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* Header Styling */
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+            text-transform: uppercase;
+            color: #ffcc00;
+            animation: blinkColor 1.5s infinite alternate;
+        }
+
+        /* Blinking effect for text color */
+        @keyframes blinkColor {
+            0% {
+                color: #ffcc00;
+            }
+
+            50% {
+                color: #ff5733;
+            }
+
+            100% {
+                color: #ffcc00;
+            }
+        }
+
+        /* Button Styling */
+        .btn-disconnect, .btn-chat, .btn-primary {
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-disconnect {
+            background-color: #ff3366;
+            color: white;
+        }
+
+        .btn-disconnect:hover {
+            background-color: #e02456;
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-chat {
+            background-color: #00b894;
+            color: white;
+        }
+
+        .btn-chat:hover {
+            background-color: #00a37b;
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Card Styling */
+        .connection-card {
+            margin-bottom: 20px;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .connection-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-body {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Footer Styling */
+        .footer {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Animation for Text Fade-In */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Particles.js Container -->
+    <div id="particles-js"></div>
+
+    <!-- Main Container -->
+    <div class="container mt-5">
+        <h2>Your Connected Mentors</h2>
+
+        <div class="connection-list">
+            {% if connections and connections|length > 0 %}
+                {% for connection in connections %}
+                    <div class="card connection-card">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="card-title">{{ connection.firstname }} {{ connection.lastname }}</h5>
+                            </div>
+                            <div>
+                                <form action="/disconnect" method="post" style="display:inline;">
+                                    <input type="hidden" name="mentor_id" value="{{ connection['mentor_id'] }}">
+                                    <input type="hidden" name="student_id" value="{{ student_id }}">
+                                    <button type="submit" class="btn btn-disconnect">Disconnect</button>
+                                </form>
+                                <button class="btn btn-chat" onclick="openChat('{{ student_id }}', '{{ connection.mentor_id }}')">Chat</button>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="alert alert-info" role="alert">
+                    No connected mentors yet.
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="{{ url_for('mentorpage') }}" class="btn btn-primary">Back to Dashboard</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <span>&copy; 2025 Student Connections. All rights reserved.</span>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Particles.js Script -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+    <script>
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 100
+                },
+                "size": {
+                    "value": 3
+                },
+                "color": {
+                    "value": "#ffffff"
+                },
+                "opacity": {
+                    "value": 0.5
+                },
+                "move": {
+                    "speed": 2
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ffffff",
+                    "opacity": 0.4,
+                    "width": 1
+                }
+            }
+        });
+
+        function openChat(student_id, mentor_id) {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/chat';
+
+            const senderInput = document.createElement('input');
+            senderInput.type = 'hidden';
+            senderInput.name = 'sender_id';
+            senderInput.value = student_id;
+        
+            const receiverInput = document.createElement('input');
+            receiverInput.type = 'hidden';
+            receiverInput.name = 'receiver_id';
+            receiverInput.value = mentor_id;
+
+            form.appendChild(senderInput);
+            form.appendChild(receiverInput);
+            document.body.appendChild(form);
+            form.submit();
+        }
+    </script>
+
+</body>
+
+</html>

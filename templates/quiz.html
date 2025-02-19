@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Adventure</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(lightpink, #8c33d9, #ef42f1);
+            color: rgb(88, 23, 108);
+            font-family: 'Press Start 2P', cursive;
+        }
+        .card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: none;
+            display: none;
+        }
+        .card.active {
+            display: block;
+        }
+        .btn-primary {
+            background-color: #ff6f61;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #ff856c;
+        }
+        #progress-bar {
+            background-color: #ff6f61;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5 text-center">
+        <h1>🎮 Quiz Adventure</h1>
+        <p>Test your knowledge one step at a time!</p>
+        <div class="progress mt-4">
+            <div class="progress-bar" role="progressbar" style="width: 0%" id="progress-bar"></div>
+        </div>
+        <form action="{{ url_for('submit') }}" method="POST" id="quiz-form">
+            {% for question in questions %}
+            <div class="card mt-4" id="question-{{ loop.index }}">
+                <div class="card-header">
+                    <h5>Question {{ loop.index }}:</h5>
+                </div>
+                <div class="card-body">
+                    <p>{{ question.text }}</p>
+                    {% for answer in question.answers %}
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="radio"
+                            name="{{ question.id }}"
+                            id="answer{{ answer.id }}"
+                            value="{{ answer.id }}"
+                        >
+                        <label class="form-check-label" for="answer{{ answer.id }}">
+                            {{ answer.text }}
+                        </label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+            <div class="mt-4">
+                <button type="button" class="btn btn-secondary" id="prev-btn" style="display: none;">Previous Question</button>
+                <button type="button" class="btn btn-primary" id="next-btn">Next Question</button>
+                <button type="submit" class="btn btn-success" id="submit-btn" style="display: none;">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const totalQuestions = {{ questions|length }};
+        const progressBar = document.getElementById('progress-bar');
+        const nextButton = document.getElementById('next-btn');
+        const prevButton = document.getElementById('prev-btn');
+        const submitButton = document.getElementById('submit-btn');
+        const cards = document.querySelectorAll('.card');
+        let currentQuestion = 0;
+
+        // Show the first question
+        cards[currentQuestion].classList.add('active');
+
+        const updateProgressBar = () => {
+            progressBar.style.width = `${((currentQuestion + 1) / totalQuestions) * 100}%`;
+        };
+
+        const updateButtons = () => {
+            prevButton.style.display = currentQuestion === 0 ? 'none' : 'inline-block';
+            nextButton.style.display = currentQuestion === totalQuestions - 1 ? 'none' : 'inline-block';
+            submitButton.style.display = currentQuestion === totalQuestions - 1 ? 'inline-block' : 'none';
+        };
+
+        const moveToQuestion = (index) => {
+            cards[currentQuestion].classList.remove('active');
+            currentQuestion = index;
+            cards[currentQuestion].classList.add('active');
+            updateProgressBar();
+            updateButtons();
+        };
+
+        // Next Button Click
+        nextButton.addEventListener('click', () => {
+            if (currentQuestion < totalQuestions - 1) {
+                moveToQuestion(currentQuestion + 1);
+            }
+        });
+
+        // Previous Button Click
+        prevButton.addEventListener('click', () => {
+            if (currentQuestion > 0) {
+                moveToQuestion(currentQuestion - 1);
+            }
+        });
+
+        // Move to the next question after selecting an answer
+        document.querySelectorAll('input[type="radio"]').forEach(input => {
+            input.addEventListener('change', () => {
+                if (currentQuestion < totalQuestions - 1) {
+                    moveToQuestion(currentQuestion + 1);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

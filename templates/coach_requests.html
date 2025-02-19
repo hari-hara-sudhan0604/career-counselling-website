@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coach Requests</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- Custom Styles -->
+    <style>
+        /* General Styling */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            color:black;
+            background-color: white;
+           
+            overflow-x: hidden;
+        }
+
+        /* Particle Background */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* Header Styling */
+        .header {
+            padding: 20px 0;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            position: relative;
+            animation: fadeIn 1s ease-in-out;
+            color: #ffcc00;
+        }
+
+        .header span {
+            display: inline-block;
+            animation: blinkText 2s infinite alternate ease-in-out;
+        }
+
+        @keyframes blinkText {
+            0% { color: #ffcc00; text-shadow: 0 0 5px #ffcc00; }
+            100% { color: #ffffff; text-shadow: 0 0 20px #ff6600; }
+        }
+
+        /* Main Container */
+        .container {
+            margin-top: 20px;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Table Styling */
+        .table {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .table th, .table td {
+            color: white;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        /* Stylish Button Styling */
+        .btn {
+            transition: all 0.3s ease-in-out;
+            border-radius: 25px;
+            padding: 10px 20px;
+            font-weight: bold;
+            border: none;
+        }
+
+        .btn-success {
+            background: linear-gradient(45deg, #28a745, #218838);
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(40, 167, 69, 0.5);
+        }
+
+        .btn-danger {
+            background: linear-gradient(45deg, #dc3545, #c82333);
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(220, 53, 69, 0.5);
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+            opacity: 0.9;
+        }
+
+        .btn i {
+            margin-right: 5px;
+        }
+
+        /* Footer Styling */
+        .footer {
+            
+            padding: 15px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            font-size: 1rem;
+            font-weight: bold;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            overflow: hidden;
+        }
+
+        .footer span {
+            display: inline-block;
+            animation: floatUpDown 3s infinite alternate ease-in-out;
+        }
+        body {
+        padding-top: 150px;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        background: #cad2f6;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 8px 40px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        z-index: 2;
+      }
+      .head {
+        text-align: center;
+      }
+      .login-register {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .login-register a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 15px;
+        text-decoration: none;
+        color: black;
+        font-weight: 600;
+        font-size: 18px;
+        cursor: pointer;
+      }
+      
+      .login-register a:hover {
+        color: rgb(214, 154, 214);
+      }
+      .nav-icon {
+        height: 24px;
+        width: 24px;
+        margin-bottom: 5px;
+      }
+        @keyframes floatUpDown {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+
+        /* Fade In Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Particle Background -->
+    
+
+    <!-- Header -->
+    <header>
+        <div class="d1">
+          <img
+            src="/static/logoo.png"
+            class="logo"
+            height="120px"
+            width="260px"
+            alt="logo"
+          />
+        </div>
+        <div class="head">
+          <h1>Life Coach</h1>
+          <p>View Request</p>
+        </div>
+        <div class="login-register">
+          <a href="{{ url_for('home') }}">
+            <img src="/static/home.png" alt="Home Icon" class="nav-icon" />
+            Home
+          </a>
+        </div>
+      </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1 class="mb-4">Connection Requests</h1>
+        <table class="table table-bordered">
+            <thead>
+                <tr >
+                    <th style="color: black;">Student Name</th>
+                    <th style="color: black;">Email</th>
+                    <th style="color: black;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for request in requests %}
+                <tr>
+                    <td style="color: black;">{{ request.firstname }} {{ request.lastname }}</td>
+                    <td style="color: black;">{{ request.email }}</td>
+                    <td style="color: black;">
+                        <form action="/handle-request" method="POST" style="display: inline;">
+                            <input type="hidden" name="connection_id" value="{{ request.id }}">
+                            <input type="hidden" name="action" value="accept">
+                            <button class="btn btn-success"><i class="fas fa-check"></i> Accept</button>
+                        </form>
+                        <form action="/handle-request" method="POST" style="display: inline;">
+                            <input type="hidden" name="connection_id" value="{{ request.id }}">
+                            <input type="hidden" name="action" value="decline">
+                            <button class="btn btn-danger"><i class="fas fa-times"></i> Decline</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <span>© 2025 Future Fordge. All rights reserved.</span>
+    </div>
+
+    <!-- Particles.js Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 80 },
+                "size": { "value": 3 },
+                "color": { "value": "#ffffff" },
+                "opacity": { "value": 0.5 },
+                "move": { "speed": 2 }
+            }
+        });
+    </script>
+
+</body>
+</html>

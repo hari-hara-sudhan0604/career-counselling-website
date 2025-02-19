@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mentor Profile</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/toggle.css">
+  <style>
+    .mentor-profile {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 25px;
+      border-radius: 12px;
+      background: #ffffff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .mentor-image {
+      max-width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #007bff;
+      margin-bottom: 15px;
+    }
+    .mentor-info h1 {
+      font-size: 22px;
+      font-weight: bold;
+      color: #333;
+    }
+    .mentor-info p {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 8px;
+    }
+    .action-button button {
+      margin: 10px 5px;
+    }
+    .back-link {
+      margin-top: 20px;
+    }
+    body {
+      padding-top: 150px;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      background: #cad2f6;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 8px 40px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      z-index: 2;
+    }
+    .head {
+      text-align: center;
+    }
+    .login-register {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+    .login-register a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 15px;
+      text-decoration: none;
+      color: black;
+      font-weight: 600;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    .login-register a:hover {
+      color: rgb(214, 154, 214);
+    }
+    .nav-icon {
+      height: 24px;
+      width: 24px;
+      margin-bottom: 5px;
+    }
+    footer {
+      background: linear-gradient(to right, #a8629e, #72a3af);
+      color: white;
+      text-align: center;
+      padding: 30px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="d1">
+      <img src="/static/logoo.png" class="logo" height="120px" width="260px" alt="logo" />
+    </div>
+    <div class="head">
+      <h1>Mentor {{ mentor.firstname }}'s Profile</h1>
+    </div>
+    <div class="login-register">
+      <a href="{{ url_for('home') }}">
+        <img src="/static/home.png" alt="Home Icon" class="nav-icon" />
+        Home
+      </a>
+    </div>
+  </header>
+  <div class="menu-container">
+    <button class="hamburger">☰</button>
+    <div class="overlay"></div>
+    <nav class="menu">
+      <ul>
+        <li><a href="/profile">Go to Profile</a></li>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="mentor-profile">
+    <div class="mentor-info">
+      <img id="mentorImage" src="/static/profile-pic-dummy.jpg" alt="Mentor Image" class="mentor-image">
+      <h1 id="mentorName" class="text-primary"></h1>
+      <p><strong>Field of Work:</strong> <span id="field_of_work"></span></p>
+      <p><strong>Email:</strong> <a id="mentorEmail" href=""></a></p>
+      <p><strong>Age:</strong> <span id="mentorAge"></span></p>
+      <p><strong>Gender:</strong> <span id="mentorGender"></span></p>
+      <p><strong>Qualification:</strong> <span id="mentorQualification"></span></p>
+      <p><strong>Years of Experience:</strong> <span id="mentorExperience"></span></p>
+      <p id="mentorBio"></p>
+    </div>
+    <div class="action-button">
+      <form action="/connect" method="post" style="display:inline;">
+        <input type="hidden" name="mentor_id" id="mentorIdField">
+        <button id="connectButton" type="submit" class="btn btn-primary" style="display:none;">Connect</button>
+      </form>
+      <button id="pendingButton" type="button" class="btn btn-warning" style="display:none;" disabled>Requested</button>
+      <button id="connectedButton" type="button" class="btn btn-success" style="display:none;" disabled>Connected</button>
+    </div>
+    <div class="back-link">
+      <a href="/mentorpage" class="btn btn-secondary">Back to Mentors</a>
+    </div>
+  </div>
+  <footer>
+    <p>Future Forge|futureforge06@gmail.com</p>
+  </footer>
+  <script src="/static/toggle.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const path = window.location.pathname;
+      const mentorId = path.split('/').pop();
+
+      if (!mentorId) {
+        document.body.innerHTML = '<p class="text-danger">Error: Mentor ID not provided.</p>';
+        return;
+      }
+
+      fetch(`/get-mentor-details?id=${mentorId}`)
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('mentorName').textContent = `${data.firstname} ${data.lastname}`;
+          document.getElementById('field_of_work').textContent = data.field_of_work;
+          document.getElementById('mentorEmail').textContent = data.email;
+          document.getElementById('mentorEmail').href = `mailto:${data.email}`;
+          document.getElementById('mentorAge').textContent = data.age;
+          document.getElementById('mentorGender').textContent = data.gender;
+          document.getElementById('mentorQualification').textContent = data.qualification;
+          document.getElementById('mentorExperience').textContent = data.years_of_experience;
+          document.getElementById('mentorBio').textContent = data.biography;
+
+          document.getElementById('mentorIdField').value = mentorId;
+
+          fetch(`/connection-status?mentor_id=${mentorId}`)
+            .then(response => response.json())
+            .then(statusData => {
+              if (statusData.connection_status === 'connect') {
+                document.getElementById('connectButton').style.display = 'inline';
+              } else if (statusData.connection_status === 'pending') {
+                document.getElementById('pendingButton').style.display = 'inline';
+              } else if (statusData.connection_status === 'connected') {
+                document.getElementById('connectedButton').style.display = 'inline';
+              }
+            })
+            .catch(error => {
+              console.error('Error fetching connection status:', error);
+            });
+
+          const mentorImage = data.image ? `/static/uploads/${data.image}` : '/static/profile-pic-dummy.jpg';
+          document.getElementById('mentorImage').src = mentorImage;
+        })
+        .catch(error => {
+          document.body.innerHTML = '<p class="text-danger">Error loading mentor details. Please try again later.</p>';
+        });
+    });
+  </script>
+</body>
+</html>

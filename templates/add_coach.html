@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Mentor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input, textarea, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        button {
+            background-color: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: darkgreen;
+        }
+    </style>
+</head>
+<body>
+    <h1>Add coach</h1>
+    <form method="POST" action="/add_coaches">
+        <!-- <input type="text" name="firstname" placeholder="First Name" required>
+        <input type="text" name="lastname" placeholder="Last Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="number" min="18" max="60" name="age" placeholder="Age" required>
+        <select name="gender" required>
+            <option value="" disabled selected>Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select>
+        <input type="text" name="qualification" placeholder="Qualification" required>
+        <input type="number" name="years_of_experience" placeholder="Years of Experience" required>
+        <input type="text" name="field_of_work" placeholder="Field of Work" required>
+        <textarea name="biography" placeholder="Biography" rows="4" required></textarea> -->
+        <label for="firstname">FirstName:</label>
+            <input type="text" id="firstname" name="firstname" required>
+
+            <label for="lastname">LastName:</label>
+            <input type="text" id="lastname" name="lastname" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            
+            <label for="age">age</label>
+            <input type="number" min="18" max="100" required name="age" id="age">
+
+            <label for="gender">gender</label>
+            <select name="gender" id="gender" required>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+
+            <label for="qualification">qualification</label>
+            <select name="qualification" id="qualification" required>
+              <option value="college student">college student</option>
+              <option value="bachelor">bachelor</option>
+              <option value="masters">masters</option>
+              <option value="M.Phill'">M.Phill'</option>
+              <option value="Ph.d">Ph.d</option>
+              <option value="others">others</option>
+            </select>
+
+            <label for="years_of_experience">years_of_experience</label>
+            <input type="number" min="0" max="10"
+            name="years_of_experience" id="years_of_experience" required>
+             
+            <label for="field_of_work">Field of Work:</label>
+            <input type="text" id="field_of_work" name="field_of_work" required>
+            <label for="biography">biography</label>
+           <textarea name="biography" id="biography" minlength="50" required></textarea>
+        <button type="submit">Add</button>
+         <a href="/view_coaches"> go back</a>
+    </form>
+</body>
+</html>

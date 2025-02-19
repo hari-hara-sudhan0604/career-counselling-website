@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionnaire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/toggle.css">
+    <style>
+       * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+      }
+      html,body{
+          height: 100%;
+      }
+        /* General Styles */
+         body {
+          display: flex;
+          flex-direction: column;
+          padding-top: 150px;
+          font-weight: 300;
+          color: #343a40;
+        
+      }
+
+
+header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            background:#cad2f6;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 8px 40px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.head{
+    text-align: center;
+}
+.login-register {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .login-register a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 15px;
+            text-decoration: none;
+            color: black;
+            font-weight: 600;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .login-register a:hover {
+            color: rgb(214, 154, 214);
+        }
+        .nav-icon {
+          height: 24px;
+          width: 24px;
+          margin-bottom: 5px;
+      }
+main {
+   max-width: 1000px;
+   margin: 30px auto;
+   padding: 20px;
+   background-color: white;
+   border-radius: 8px;
+   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.hidden {
+            display: none;
+        }
+/* Question Styles */
+.question {
+   margin-bottom: 20px;
+}
+
+.question h3 {
+   font-size: 1.2rem;
+   margin-bottom: 10px;
+}
+
+/* Options Styles */
+.options {
+   display: grid;
+   grid-template-columns: repeat(3, 1fr);
+   grid-gap: 10px;
+}
+
+.options label {
+   display: flex;
+   align-items: center;
+   padding: 10px;
+   border: 1px solid #dee2e6;
+   border-radius: 5px;
+   background-color: #f8f9fa;
+   transition: background-color 0.3s, border-color 0.3s;
+   cursor: pointer;
+}
+
+img{
+   border-radius: 5px;
+}
+
+.options label:hover {
+   background-color: #e9ecef;
+   border-color: #adb5bd;
+}
+
+.options input[type="radio"] {
+   margin-right: 10px;
+}
+
+
+/* Button Styles */
+button {
+   display: block;
+   
+   padding: 12px;
+   font-size: 1rem;
+   font-weight: 600;
+   color: white;
+   background-color: #007bff;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   transition: background-color 0.3s;
+}
+
+button:hover {
+   background-color: #0056b3;
+}
+
+/* Result Box Styles */
+#result-box {
+   margin-top: 20px;
+   padding: 15px;
+   border-radius: 5px;
+   background-color: #e9ecef;
+   display: none;
+}
+
+/* Loader Styles */
+#loader {
+   display: none;
+   margin: 20px auto;
+   width: 40px;
+   height: 40px;
+   border: 5px solid #f3f3f3;
+   border-top: 5px solid #007bff;
+   border-radius: 50%;
+   animation: spin 1s linear infinite;
+}
+
+footer {
+          text-align: center;
+          padding: 1rem;
+          background: linear-gradient(to right, #a8629e, #72a3af);
+          color: white;
+          font-size: 0.9rem;
+         margin-top: auto;
+         
+      }
+      
+      .heading {
+  flex: 1; /* Pushes the footer to the bottom if no content is present */
+}
+/* Keyframes for Loader */
+@keyframes spin {
+   0% {
+       transform: rotate(0deg);
+   }
+   100% {
+       transform: rotate(360deg);
+   }
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+   main {
+       padding: 15px;
+   }
+
+   .question h3 {
+       font-size: 1rem;
+   }
+
+   button {
+       padding: 10px;
+       font-size: 0.9rem;
+   }
+
+   .options label {
+       padding: 8px;
+   }
+}
+/* Styles for Next Button */
+.next-btn,.prev-btn{
+    background-color: #007bff; /* Blue background */
+    color: white; /* White text */
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute; /* Position them explicitly */
+    top: 5.5%px; /* Place near the bottom of the page */
+    transition: background-color 0.3s;
+    font-size: 16px;
+}
+.prev-btn {
+    right:100px;
+   
+}
+
+.next-btn {
+    right: 20px; /* Align to the right */
+}
+.submit{
+    right:20px;
+}
+
+/emoji animation/
+#feedback-emoji {
+    transition: transform 0.2s ease-in-out;
+}
+
+#feedback-emoji:hover {
+    transform: scale(1.1);
+}
+/end emoji/
+   </style>
+
+</head>
+<body>
+    <div class="menu-container">
+        <!-- Hamburger Button -->
+        <button class="hamburger">☰</button>
+    
+        <!-- Overlay -->
+        <div class="overlay"></div>
+    
+        <!-- Dropdown Menu -->
+        <nav class="menu">
+          <ul>
+            <li><a href="/profile">Go to Profile</a></li>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/logout">Logout</a></li>
+          </ul>
+        </nav>
+      </div>
+    <header>
+        <div class="d1">
+            <img src="/static/logoo.png" class="logo" height="120px" width="260px"alt="logo">
+        </div>
+        <div class="head">
+        <h1>Questionnaire</h1>
+        <p>Choose the options that best represent your preferences</p>
+       </div>  
+    </header>
+    
+    <main>
+        <form id="questionnaire-form" method="post" action="/">
+            <div class="question">
+                <h3>Question 1: What type of activity do you enjoy most in your free time?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="Realistic" required><img src="/static/1a.jpg" width="150px" alt="1a"> <br> <span class="desc"> Fixing something </span></label>
+                    <label><input type="radio" name="q1" value="Enterprising" required><img src="/static/1e.jpg" width="100px" alt="1a"> <br> <span class="desc"> Leading a group </span></label>
+                    <label><input type="radio" name="q1" value="Investigative"> <img src="/static/1b.jpg" width="100px" alt="1b"><br> <span class="desc"> Researching  on a topic </span></label>
+                    <label><input type="radio" name="q1" value="Social" required><img src="/static/1d.jpg" width="100px" alt="1a"> <br> <span class="desc"> Helping others </span></label>
+                    <label><input type="radio" name="q1" value="Conventional" required><img src="/static/1f.jpg" width="100px" alt="1a"> <br> <span class="desc"> Organizing </span></label>
+                    <label><input type="radio" name="q1" value="Artistic" required><img src="/static/1c.jpg" width="100px" alt="1a"> <br> <span class="desc"> Painting</span></label>
+                </div>
+            </div>
+            <div class="question hidden">
+                <h3>Question 2: What kind of school project excites you the most?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="Social" required><img src="/static/2d.jpg" width="100px" alt="1a"> <br> <span class="desc"> A project that involves helping classmates</span></label>
+                    <label><input type="radio" name="q2" value="Realistic" required> <img src="/static/2a.jpg" width="100px" alt="2a"> <br> <span class="desc"> A hands-on project, like designing/creating a model  </span></label>
+                    <label><input type="radio" name="q2" value="Conventional" required><img src="/static/2f.jpg" width="100px" alt="1a"> <br> <span class="desc"> A project that requires creating schedules </span></label>
+                    <label><input type="radio" name="q2" value="Artistic" required><img src="/static/2c.jpg" width="100px" alt="1a"> <br> <span class="desc"> A creative project like making a film </span></label>
+                    <label><input type="radio" name="q2" value="Investigative"> <img src="/static/2b.jpg" alt="2b" width="100px"> <br> <span class="desc"> A research project where you can explore facts and theories</span> </label>
+                    <label><input type="radio" name="q2" value="Enterprising" required><img src="/static/2e.jpg" width="100px" alt="1a"> <br> <span class="desc"> A group project where you take the lead to achieve goals </span></label>
+                </div>
+                <button type="button" class="prev-btn">Previous</button>
+                
+            </div>
+
+            <div class="question hidden">
+                <h3>Question 3: Which career would you find most appealing?
+                </h3>
+                <div class="options">
+                    <label><input type="radio" name="q3" value="Investigative"> <img src="/static/3b.jpg" alt="2b" width="100px"> <br> <span class="desc"> Scientist </span> </label>
+                    <label><input type="radio" name="q3" value="Realistic" required> <img src="/static/3a.png" width="100px" alt="2a"> <br> <span class="desc"> Engineer  </span></label>
+                    <label><input type="radio" name="q3" value="Conventional" required><img src="/static/3f.jpg" width="100px" alt="1a"> <br> <span class="desc">Office manager</span></label>
+                    <label><input type="radio" name="q3" value="Social" required><img src="/static/3d.jpeg" width="100px" alt="1a"> <br> <span class="desc"> Teacher</span></label>
+                    <label><input type="radio" name="q3" value="Artistic" required><img src="/static/3c.png" width="100px" alt="1a"> <br> <span class="desc"> Photographer</span></label>
+                    <label><input type="radio" name="q3" value="Enterprising" required><img src="/static/3e.png" width="100px" alt="1a"> <br> <span class="desc"> Lawyer </span></label>
+                    
+                </div>
+                <button type="button" class="prev-btn">Previous</button>
+               
+            </div>
+
+            <div class="question hidden">
+                <h3>Question 4:What type of club would you prefer to join?
+                </h3>
+                <div class="options">
+                    <label><input type="radio" name="q4" value="Artistic" required><img src="/static/4c.jpg" width="100px" alt="1a"> <br> <span class="desc"> Drama club </span></label>
+                    <label><input type="radio" name="q4" value="Realistic" required> <img src="/static/4a.jpg" width="100px" alt="2a"> <br> <span class="desc"> Robotics club </span></label>
+                    <label><input type="radio" name="q4" value="Enterprising" required><img src="/static/4e.jpg" width="100px" alt="1a"> <br> <span class="desc">  Debate club </span></label>
+                    <label><input type="radio" name="q4" value="Investigative"> <img src="/static/4b.jpg" alt="2b" width="100px"> <br> <span class="desc"> Science club </span> </label>
+                    <label><input type="radio" name="q4" value="Conventional" required><img src="/static/4f.jpg" width="100px" alt="1a"> <br> <span class="desc"> Organization club </span></label>
+                    <label><input type="radio" name="q4" value="Social" required><img src="/static/4d.jpg" width="100px" alt="1a"> <br> <span class="desc"> Community service </span></label>
+                    
+                    
+                </div>
+                <button type="button" class="prev-btn">Previous</button>
+                
+            </div>
+
+            <div class="question hidden">
+                <h3>Question 5: What kind of event would you enjoy organizing?
+                </h3>
+                <div class="options">
+                    <label><input type="radio" name="q5" value="Enterprising" required><img src="/static/5e.jpg" width="100px" alt="1a"> <br> <span class="desc"> Seminar</span></label>
+                    <label><input type="radio" name="q5" value="Realistic" required> <img src="/static/5a.jpg" width="100px" alt="2a"> <br> <span class="desc"> A hands-on workshop</span></label>
+                    <label><input type="radio" name="q5" value="Investigative"> <img src="/static/5b.jpg" alt="2b" width="100px"> <br> <span class="desc"> A science fair</span> </label>
+                    <label><input type="radio" name="q5" value="Social" required><img src="/static/5d.jpg" width="100px" alt="1a"> <br> <span class="desc"> A charity fundraiser</span></label>
+                    <label><input type="radio" name="q5" value="Conventional" required><img src="/static/5f.jpg" width="100px" alt="1a"> <br> <span class="desc"> A well-structured meeting</span></label>
+                    <label><input type="radio" name="q5" value="Artistic" required><img src="/static/5c.jpg" width="100px" alt="1a"> <br> <span class="desc"> Talent show </span></label>
+                </div>
+                <button type="button" class="prev-btn">Previous</button>
+                
+            </div>
+
+            <div class="question hidden">
+                <h3>Question 6: What type of task do you prefer?
+                </h3>
+                <div class="options">
+                    <label><input type="radio" name="q6" value="Investigative"> <img src="/static/6b)Solving puzzles.jpg" alt="2b" width="100px"> <br> <span class="desc"> Solving puzzles</span> </label>
+                    <label><input type="radio" name="q6" value="Realistic" required> <img src="/static/6a)Assembling something.jpg" width="100px" alt="2a"> <br> <span class="desc"> Assembling  </span></label>
+                    <label><input type="radio" name="q6" value="Social" required><img src="/static/6d)Talking to friends.jpg" width="100px" alt="1a"> <br> <span class="desc"> Helping people</span></label>
+                    <label><input type="radio" name="q6" value="Artistic" required><img src="/static/6c)Designing something.jpg" width="100px" alt="1a"> <br> <span class="desc"> Designing something unique</span></label>
+                    <label><input type="radio" name="q6" value="Conventional" required><img src="/static/6f)Organizing data.jpg" width="100px" alt="1a"> <br> <span class="desc"> Organizing  </span></label>
+                    <label><input type="radio" name="q6" value="Enterprising" required><img src="/static/6e)Presenting ideas.jpg" width="100px" alt="1a"> <br> <span class="desc"> Presenting ideas</span></label>
+                    
+                </div>
+                <button type="button" class="prev-btn">Previous</button>
+               
+            </div>
+
+            <div class="question hidden">
+                <h3>Question 7:What is your ideal weekend activity?
+                </h3>
+                <div class="options">
+                    <label><input type="radio" name="q7" value="Realistic" required> <img src="/static/7a)Gardening.jpg" width="100px" alt="2a"> <br> <span class="desc"> Gardening </span></label>
+                    <label><input type="radio" name="q7" value="Enterprising" required><img src="/static/7e)motivational.jpg" width="100px" alt="1a"> <br> <span class="desc"> Attending a motivational talk</span></label>
+                    <label><input type="radio" name="q7" value="Conventional" required><img src="/static/7f)Cleaning your room.jpg" width="100px" alt="1a"> <br> <span class="desc"> Cleaning your room </span></label>
+                    <label><input type="radio" name="q7" value="Artistic" required><img src="/static/7c)Performing on stages.jpg" width="100px" alt="1a"> <br> <span class="desc"> Performing on stages </span></label>
+                    <label><input type="radio" name="q7" value="Social" required><img src="/static/7d)Volunteering.jpg" width="100px" alt="1a"> <br> <span class="desc"> Volunteering</span></label>
+                    <label><input type="radio" name="q7" value="Investigative"> <img src="/static/7b)Exploring a museum.jpg" alt="2b" width="100px"> <br> <span class="desc"> Exploring a museum </span> </label>
+                    
+                </div>
+                <button type="button" class="prev-btn">Previous</button>
+                
+            </div>
+
+            <div class="question hidden">
+                <h3>Question 8: What kind of challenge excites you most?
+                </h3>
+                <div class="options">
+                    <label><input type="radio" name="q8" value="Social" required><img src="/static/8d)Solving someone's problems.jpg" width="100px" alt="1a"> <br> <span class="desc"> Solving someone's problems</span></label>
+                    <label><input type="radio" name="q8" value="Investigative"> <img src="/static/8b)Figuring out how something works.jpg" alt="2b" width="100px"> <br> <span class="desc"> Figuring out how something works </span> </label>
+                    <label><input type="radio" name="q8" value="Artistic" required><img src="/static/8c)Creating a masterpiece.jpg" width="100px" alt="1a"> <br> <span class="desc"> Creating a masterpiece</span></label>
+                    <label><input type="radio" name="q8" value="Conventional" required><img src="/static/8f)Keeping everything organized.jpg" width="100px" alt="1a"> <br> <span class="desc"> Keeping everything perfectly organized</span></label>
+                    <label><input type="radio" name="q8" value="Enterprising" required><img src="/static/8e)Convincing others to agree with your ideas.jpg" width="100px" alt="1a"> <br> <span class="desc"> Convincing others to agree</span></label>
+                    <label><input type="radio" name="q8" value="Realistic" required> <img src="/static/8a)Building something.jpg" width="100px" alt="2a"> <br> <span class="desc"> Building new</span></label>
+                    
+                </div>
+                <button type="button" class="prev-btn">Previous</button>
+               
+            </div>
+            <div class="question hidden">
+                <h3>Question 9: Which of these tasks do you prefer in a group setting?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q9" value="Investigative"> <img src="/static/9b)Researching solutions.jpg" alt="2b" width="100px"> <br> <span class="desc"> Researching solutions </span> </label>
+                    <label><input type="radio" name="q9" value="Realistic" required> <img src="/static/9a)Setting up equipments.jpg" width="100px" alt="9a"> <br> <span class="desc"> Setting up equipment </span></label>
+                    <label><input type="radio" name="q9" value="Social" required><img src="/static/9d)Mediating between group members.jpg" width="100px" alt="1a"> <br> <span class="desc"> Mediating between group members </span></label>
+                    <label><input type="radio" name="q9" value="Artistic" required><img src="/static/9c)Designing a poster.jpg" width="100px" alt="1a"> <br> <span class="desc"> Designing a poster </span></label>
+                    <label><input type="radio" name="q9" value="Conventional" required><img src="/static/10f)By following clear instructions.jpg" width="100px" alt="1a"> <br> <span class="desc"> By following clear instructions </span></label>
+                    <label><input type="radio" name="q9" value="Enterprising" required><img src="/static/9e)Discussion.jpg" width="100px" alt="1a"> <br> <span class="desc"> Discussion </span></label>
+                </div>
+                <button type="button" class="prev-btn">Previous</button>
+            </div>
+        
+            <div class="question hidden">
+                <h3>Question 10: How do you feel most comfortable learning?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q10" value="Enterprising" required><img src="/static/10e)By discussing.jpg" width="100px" alt="1a"> <br> <span class="desc"> By discussing</span></label>
+                    <label><input type="radio" name="q10" value="Realistic" required> <img src="/static/10a)By doing hands-on activities.jpg" width="100px" alt="2a"> <br> <span class="desc"> By doing hands-on activities</span></label>
+                    <label><input type="radio" name="q10" value="Social" required><img src="/static/10d)By working with others.png" width="100px" alt="1a"> <br> <span class="desc"> By working with or helping others</span></label>
+                    <label><input type="radio" name="q10" value="Investigative"> <img src="/static/10b)By asking questions.png" alt="2b" width="100px"> <br> <span class="desc"> By asking questions</span> </label>
+                    <label><input type="radio" name="q10" value="Conventional" required><img src="/static/10f)By following clear instructions.jpg" width="100px" alt="1a"> <br> <span class="desc"> By following clear instructions </span></label>
+                    <label><input type="radio" name="q10" value="Artistic" required><img src="/static/10c)By expressing yourself.jpg" width="100px" alt="1a"> <br> <span class="desc"> By expressing yourself </span></label>
+                </div>
+        
+                <button type="button" class="prev-btn">Previous</button>
+                <button type="submit" class="submit" onclick="showLoader(event)">Submit</button>
+            </div>
+        </form>
+        
+
+        </main>
+
+
+
+<!-- Loader -->
+<div id="loader" style="display:none;"></div>
+
+<!-- Result Box -->
+{% if mode_result %}
+<div id="result-box" style="display: block;">
+    <strong>Generated Recommendations:</strong>
+    <p id="result">{{ mode_result|safe }}</p>
+    <center><strong><a href="/quiz" >Like to take quiz</a></strong></center>
+</div>
+{% endif %}
+
+<footer>
+    <p>Future Forge | futureforge06@gmail.com</p>
+</footer>
+
+<script>
+    const questions = document.querySelectorAll('.question');
+    const prevButtons = document.querySelectorAll('.prev-btn');
+
+    let currentQuestionIndex = 0;
+
+    // Function to show the current question and hide others
+    function showQuestion(index) {
+        questions.forEach((question, i) => {
+            question.classList.toggle('hidden', i !== index);
+        });
+    }
+
+    // Function to check if the current question is answered
+    function isQuestionAnswered(index) {
+        const currentQuestion = questions[index];
+        const inputs = currentQuestion.querySelectorAll('input[type="radio"]');
+        return Array.from(inputs).some(input => input.checked);
+    }
+
+    // Event listener for radio button change (when an answer is selected)
+    const radioButtons = document.querySelectorAll('input[type="radio"]');
+    radioButtons.forEach((radioButton) => {
+        radioButton.addEventListener('change', () => {
+            if (isQuestionAnswered(currentQuestionIndex)) {
+                // Automatically go to the next question after answering
+                if (currentQuestionIndex < questions.length - 1) {
+                    currentQuestionIndex++;
+                    showQuestion(currentQuestionIndex);
+                }
+            }
+        });
+    });
+
+    // Event listeners for "Previous" buttons
+    prevButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                showQuestion(currentQuestionIndex);
+            }
+        });
+    });
+
+    function showLoader(event) {
+        event.preventDefault(); // Prevent form submission to show loader first
+
+        const loader = document.getElementById("loader");
+        const resultBox = document.getElementById("result-box");
+
+        if (loader) {
+            loader.style.display = "block"; // Show the loader
+        } else {
+            console.error("Loader element not found!");
+        }
+
+        if (resultBox) {
+            resultBox.style.display = "none"; // Hide the result box
+        }
+
+        // Wait for a moment before submitting
+        setTimeout(() => {
+            const form = document.getElementById("questionnaire-form");
+            if (form) {
+                form.submit(); // Now submit the form
+            } else {
+                console.error("Form element not found!");
+            }
+        }, 1000); // Adjust the delay as needed
+    }
+
+    // Call the first question to show initially
+    showQuestion(currentQuestionIndex);
+</script>
+
+
+    <script src="/static/toggle.js"></script>
+</body>
+</html>

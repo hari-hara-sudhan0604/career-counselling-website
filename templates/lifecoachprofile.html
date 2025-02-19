@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coach Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            font-family: 'Arial', sans-serif;
+            padding-top: 150px;
+        }
+        .container {
+            max-width: 700px;
+            margin: 50px auto;
+        }
+        .card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            text-align: center;
+        }
+        .card img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #007bff;
+        }
+        h2 {
+            color: #333;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        p {
+            font-size: 16px;
+            margin: 5px 0;
+            color: #555;
+        }
+        .btn {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 25px;
+            margin-top: 10px;
+            transition: 0.3s ease-in-out;
+        }
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+        .btn-warning, .btn-success {
+            opacity: 0.8;
+        }
+        .btn-warning:hover, .btn-success:hover {
+            opacity: 1;
+        }
+        .btn-link {
+            text-decoration: none;
+            display: block;
+            margin-top: 15px;
+            color: #007bff;
+        }
+        .btn-link:hover {
+            text-decoration: underline;
+        }
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            background:#CAD2F6;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 8px 40px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 2;
+}
+.head{
+    text-align: center;
+}
+.login-register {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .login-register a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 15px;
+            text-decoration: none;
+            color: black;
+            font-weight: 600;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .login-register a:hover {
+            color: rgb(214, 154, 214);
+        }
+        .nav-icon {
+          height: 24px;
+          width: 24px;
+          margin-bottom: 5px;
+      }
+      footer {
+            text-align: center;
+            padding: 1rem;
+            background: linear-gradient(to right, #a8629e, #72a3af);
+            color: white;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="d1">
+            <img src="/static/logoo.png" class="logo" height="120px" width="260px"alt="logo">
+        </div>
+        <div class="head">
+         <h1>lifecoach Program</h1>
+        <p>Meet Our psychological mentors</p>
+       </div>
+        <div class="login-register">
+            <a href="{{ url_for('home') }}">
+                <img src="/static/home.png" alt="Home Icon" class="nav-icon">
+                Home
+            </a>
+          <a href="/student-coaches">
+            <img src="/static/home.png" alt="Home Icon" class="nav-icon">
+            connected coaches
+        </a>
+        </div>
+       
+    </header>
+    <div class="container">
+        <div id="coach-profile" class="card">
+            <center>
+            <img src="/static/profile-pic-dummy.jpg" alt="Coach Image">
+        </center>
+            <h2 id="coachName"></h2>
+            <p><strong>Field of Work:</strong> <span id="field_of_work"></span></p>
+            <p><strong>Email:</strong> <a id="coachEmail" href=""></a></p>
+            <p><strong>Age:</strong> <span id="coachAge"></span></p>
+            <p><strong>Gender:</strong> <span id="coachGender"></span></p>
+            <p><strong>Qualification:</strong> <span id="coachQualification"></span></p>
+            <p><strong>Years of Experience:</strong> <span id="coachExperience"></span></p>
+            <p><strong>Biography:</strong> <span id="coachBio"></span></p>
+
+            <form action="/connectcoach" method="post">
+                <input type="hidden" name="coach_id" id="coachIdField">
+                <button id="connectButton" class="btn btn-primary">Connect</button>
+                <button id="pendingButton" class="btn btn-warning" style="display:none;" disabled>Requested</button>
+                <button id="connectedButton" class="btn btn-success" style="display:none;" disabled>Connected</button>
+            </form>
+            
+            <a href="/lifecoach" class="btn btn-link">Back to Coaches</a>
+        </div>
+    </div>
+    <footer>
+        <p>Future Forge|futureforge06@gmail.com</p>
+      </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const path = window.location.pathname;
+            const coachId = path.split('/').pop();
+
+            if (!coachId) {
+                alert("Error: Coach ID not found in URL.");
+                return;
+            }
+
+            fetch(`/get-lifecoach-details?id=${coachId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        alert(data.error);
+                        return;
+                    }
+                    document.getElementById('coachName').textContent = `${data.firstname} ${data.lastname}`;
+                    document.getElementById('field_of_work').textContent = data.field_of_work;
+                    document.getElementById('coachEmail').textContent = data.email;
+                    document.getElementById('coachEmail').href = `mailto:${data.email}`;
+                    document.getElementById('coachAge').textContent = data.age;
+                    document.getElementById('coachGender').textContent = data.gender;
+                    document.getElementById('coachQualification').textContent = data.qualification;
+                    document.getElementById('coachExperience').textContent = data.years_of_experience;
+                    document.getElementById('coachBio').textContent = data.biography;
+                    
+                    document.getElementById('coachIdField').value = coachId;
+
+                    return fetch(`/connection-statuss?coach_id=${coachId}`);
+                })
+                .then(response => response.json())
+                .then(statusData => {
+                    if (statusData.connection_status === 'connect') {
+                        document.getElementById('connectButton').style.display = 'block';
+                    } else if (statusData.connection_status === 'pending') {
+                        document.getElementById('pendingButton').style.display = 'block';
+                    } else if (statusData.connection_status === 'connected') {
+                        document.getElementById('connectedButton').style.display = 'block';
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
+        });
+    </script>
+</body>
+
+</html>

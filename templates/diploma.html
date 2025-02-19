@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diploma Courses</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/toggle.css">
+    <style>
+        /* Custom styles */
+        body {
+            font-weight: 300;
+            color: #343a40;
+            padding-top: 150px;
+        }
+
+        header {
+            background: #CAD2F6;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 8px 40px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2rem;
+        }
+
+        header p {
+            font-size: 1rem;
+        }
+
+        .nav-icon {
+            height: 24px;
+            width: 24px;
+            margin-bottom: 5px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background: linear-gradient(to right, #a8629e, #72a3af);
+            color: white;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="d-flex justify-content-between align-items-center">
+        <div class="menu-container">
+            <!-- Hamburger Button -->
+            <button class="hamburger">☰</button>
+        
+            <!-- Overlay -->
+            <div class="overlay"></div>
+        
+            <!-- Dropdown Menu -->
+            <nav class="menu">
+              <ul>
+                <li><a href="/profile">Go to Profile</a></li>
+                <li><a href="/home">Home</a></li>
+               
+                <li><a href="/logout">Logout</a></li>
+              </ul>
+            </nav>
+          </div>
+        <div>
+            <img src="/static/logoo.png" class="logo" height="120px" width="260px" alt="logo">
+        </div>
+        <div class="text-center">
+            <h1>Diploma Courses: Quick Path to Specialized Skills</h1>
+            <p>Discover a variety of diploma courses designed for career success.</p>
+        </div>
+        <div>
+            <a href="{{ url_for('home') }}" class="d-flex flex-column align-items-center text-decoration-none text-dark fw-bold fs-5">
+                <img src="/static/home.png" alt="Home Icon" class="nav-icon">
+                Home
+            </a>
+        </div>
+    </header>
+
+    <main class="container mt-5">
+        <h2 class="text-gradient">Diploma Courses After 12th: A Quick Path to Specialized Skills</h2>
+        <p>
+            Diploma courses are short, focused study programs that equip students with specific skills in a particular field, usually taking 1 to 2 years to complete. Unlike traditional degree programs that span several years, diplomas emphasize hands-on learning and practical knowledge, allowing students to enter the workforce quickly.
+        </p>
+
+        <h2>Benefits of Diploma Courses</h2>
+        <p>
+            Diploma courses offer numerous advantages that make them an attractive choice for students:
+        </p>
+        <ul>
+            <li><strong>Hands-On Experience:</strong> Practical training that directly applies to real-world jobs.</li>
+            <li><strong>Short Duration:</strong> Complete your education faster and start your career sooner.</li>
+            <li><strong>Cost-Effective:</strong> More affordable than traditional degree programs.</li>
+            <li><strong>Focused Learning:</strong> Specialize in a specific area, gaining expertise.</li>
+            <li><strong>Flexible Entry Requirements:</strong> Many diploma programs have simpler eligibility criteria, making them accessible to more students.</li>
+        </ul>
+
+        <h2>Top Diploma Courses in India</h2>
+        <p>
+            Here are some popular diploma courses available after completing 12th grade, along with their eligibility criteria and career prospects:
+        </p>
+        <ul>
+            <li><strong>Diploma in Engineering:</strong> Suitable for students with a 10th-grade background in Math, Physics, and Chemistry. Opens doors to technical roles in industries.</li>
+            <li><strong>Diploma in Hotel Management:</strong> Available to students with 50% marks in 10+2. Offers global opportunities in the hospitality industry.</li>
+            <li><strong>Diploma in Computer and Programming:</strong> Ideal for 10th or 12th pass students with basic computer knowledge. Careers in IT, programming, and networking await.</li>
+            <li><strong>Nursing Diploma:</strong> For students with 40% in 12th. Fulfills the growing need for healthcare professionals.</li>
+            <li><strong>Diploma in Interior Designing:</strong> Requires 50% in 10+2. Provides career opportunities in the design and real estate industries.</li>
+            <li><strong>Diploma in Fire Safety:</strong> A program for 12th pass students focusing on safety management.</li>
+            <li><strong>Diploma in Digital Marketing:</strong> Open to 12th pass students, this course teaches SEO, social media, and online marketing strategies.</li>
+            <li><strong>Diploma in Event Management:</strong> Prepares students for careers in wedding planning, corporate events, and large-scale functions.</li>
+        </ul>
+
+        <h2>Diploma Courses After 10th</h2>
+        <p>
+            Diploma courses after 10th grade provide students with a direct path to careers in specialized fields:
+        </p>
+        <ul>
+            <li><strong>Diploma in Engineering:</strong> A stepping stone to technical roles in various industries.</li>
+            <li><strong>Diploma in Medical Lab Technology:</strong> Prepares students to work in diagnostic labs.</li>
+            <li><strong>Diploma in Animation and Multimedia:</strong> A creative program for content creation in media and entertainment.</li>
+            <li><strong>Diploma in Culinary Arts:</strong> Focuses on cooking and kitchen management for a career in the culinary industry.</li>
+            <li><strong>Diploma in Fashion Designing:</strong> Provides a platform to enter the fashion industry.</li>
+        </ul>
+    </main>
+
+    <footer>
+        <p>Future Forge | futureforge06@gmail.com</p>
+    </footer>
+    <script src="/static/toggle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

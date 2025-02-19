@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Mentors</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .btn-delete {
+            background-color: #ff4c4c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        body{
+            background-image: url("/static/mentordetails.jpeg");
+            background-repeat: no-repeat;
+            background-size: 200%;
+        }
+        .btn-delete:hover {
+            background-color: #ff1a1a;
+        }
+
+        .btn-approve {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .btn-approve:hover {
+            background-color: #218838;
+        }
+
+        .back-btn {
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
+
+        .back-btn:hover {
+            background-color: #191a1b;
+        }
+
+        .add-btn {
+            background-color: green;
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
+
+        .add-btn:hover {
+            background-color: #004d00;
+        }
+
+        /* Centering the "Back to Dashboard" and "Add Mentor" buttons */
+        .action-btns {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Mentor Details</h1>
+
+        <div class="action-btns">
+            <a href="/add_mentor" class="add-btn">Add Mentor</a>
+            <a href="/dashboard" class="back-btn">Back to Dashboard</a>
+        </div>
+
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Qualification</th>
+                    <th>Years of Experience</th>
+                    <th>Field of Work</th>
+                    <th>Biography</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for mentor in mentors %}
+                <tr>
+                    <td>{{ mentor['firstname'] }}</td>
+                    <td>{{ mentor['lastname'] }}</td>
+                    <td>{{ mentor['email'] }}</td>
+                    <td>{{ mentor['age'] }}</td>
+                    <td>{{ mentor['gender'] }}</td>
+                    <td>{{ mentor['qualification'] }}</td>
+                    <td>{{ mentor['years_of_experience'] }}</td>
+                    <td>{{ mentor['field_of_work'] }}</td>
+                    <td>{{ mentor['biography'] }}</td>
+                    <td>
+                        <form method="POST" action="/delete_mentor/{{ mentor['mentor_id'] }}" style="display:inline;">
+                            <button type="submit" class="btn btn-delete">Delete</button>
+                        </form>
+                        <form method="POST" action="/approve_mentor/{{ mentor['mentor_id'] }}" style="display:inline;">
+                            <button type="submit" class="btn btn-approve">
+                                {{ 'Approved' if mentor['is_approved'] else 'Approve' }}
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

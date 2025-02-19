@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>Mentor Home</title>
+
+    <style>
+
+        /* Basic styling */
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            background-color: #f4f4f9;
+
+            margin: 0;
+
+            padding: 0;
+
+        }
+
+        .header {
+
+            background: #CAD2F6;
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 15px;
+
+            font-size: 24px;
+
+        }
+
+        .header img {
+
+            height: 100px;
+
+        }
+
+        .header a {
+
+            color: black;
+
+            text-decoration: none;
+
+            font-size: 18px;
+
+        }
+
+        .header h2{
+
+            color: black;
+
+        }
+
+        .container {
+
+            width: 50%;
+
+            margin: auto;
+
+            padding: 30px;
+
+            background-color: white;
+
+            margin-top: 50px;
+
+            border-radius: 12px;
+
+            text-align: center;
+
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+
+            transition: transform 0.3s;
+
+        }
+
+        .container:hover {
+
+            transform: translate(-5px);
+
+        }
+
+        .container h1 {
+
+            color: #333;
+
+            font-size: 28px;
+
+            margin-bottom: 20px;
+
+        }
+
+        .btn {
+
+            display: inline-block;
+
+            margin: 10px;
+
+            padding: 12px 25px;
+
+            background: linear-gradient(to right, #a8629e, #72a3af);
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 8px;
+
+            transition: background-color 0.3s, transform 0.2s;
+
+            font-size: 16px;
+
+        }
+
+        
+
+        .btn.logout {
+
+            background: linear-gradient(to right, #a8629e, #72a3af);
+
+        }
+
+        
+
+        .footer {
+
+            background: linear-gradient(to right, #a8629e, #72a3af);
+
+            color: white;
+
+            text-align: center;
+
+            padding: 30px;
+
+            position: fixed;
+
+            bottom: 0;
+
+            width: 100%;
+
+            font-size: 14px;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="header">
+
+        <img src="/static/logoo.png" alt="Logo">
+
+        <h2>Mentor Dashboard</h2>
+
+        <a href="/">Home</a>
+
+    </div>
+
+    <div class="container">
+
+        <h1>Welcome, {{ firstname }}!</h1>
+
+        <a href="/students" class="btn">View Student List</a>
+
+        <a href="/mentor_requests" class="btn">View Requests</a>
+
+        <a href="{{ url_for('mentor_connections', mentor_id=mentor_id) }}" class="btn">Connected Students</a>
+
+        <a href="/mlogout" class="btn logout">Logout</a>
+
+    </div>
+
+    <div class="footer">Future Forge | futureforge06@gmail.com</div>
+
+</body>
+
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parent Signup</title>
+   <!-- Bootstrap CSS -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+   <!-- Font Awesome Icons -->
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+       body {
+    background: rgba(64, 3, 99, 0.13);
+    animation: gradientAnimation 8s ease infinite;
+    overflow: auto;
+}
+
+
+        @keyframes gradientAnimation {
+            0% {
+                background:rgba(64, 3, 99, 0.13);
+            }
+            50% {
+                background:rgba(64, 3, 99, 0.13);
+            }
+            100% {
+                background:rgba(64, 3, 99, 0.13);
+            }
+        }
+
+        .form-container {
+            background-color: #FFFFFF;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            animation: formAnimation 1s ease-out;
+        }
+
+        @keyframes formAnimation {
+            0% {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .form-container h2 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #3F4A56;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .form-container label {
+            font-size: 16px;
+            font-weight: 500;
+            color: #3F4A56;
+        }
+
+        .form-container input,
+        .form-container select {
+            background-color: #F5F7FA;
+            border: 1px solid #D1D9E0;
+            border-radius: 5px;
+            font-size: 15px;
+            padding: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .form-container button {
+            background-color: #B4C8D5;
+            border: none;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 0.75rem;
+            width: 100%;
+            margin-top: 1.5rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-container button:hover {
+            background-color: #A0B7C3;
+            filter: drop-shadow(0 0 10px #A0B7C3);
+        }
+
+        .header-links {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .header-links a {
+            text-decoration: none;
+            font-size: 14px;
+            color: #6C7A89;
+        }
+
+        .header-links a:hover {
+            text-decoration: underline;
+            color: #4E5A63;
+        }
+
+        .floating-shapes .shape {
+            position: absolute;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        .floating-shapes .shape:nth-child(1) {
+            width: 120px;
+            height: 120px;
+            background: rgba(135, 18, 43, 0.4);
+            top: -30px;
+            left: -30px;
+            border-radius: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-shapes .shape:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            background: rgba(17, 122, 167, 0.3);
+            top: 200px;
+            right: -100px;
+            animation-delay: 2s;
+            border-radius: 20%;
+        }
+
+        .floating-shapes .shape:nth-child(3) {
+            width: 180px;
+            height: 180px;
+            background: rgba(183, 54, 168, 0.4);
+            bottom: -80px;
+            left: 150px;
+            animation-delay: 4s;
+            border-radius: 5%;
+        }
+        .header-links {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .header-links a {
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            color: #4a6ea9;
+        }
+
+        .header-links a:hover {
+            text-decoration: underline;
+        }
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-25px);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="col-md-6">
+            <div class="floating-shapes">
+                <div class="shape"></div>
+                <div class="shape"></div>
+                <div class="shape"></div>
+            </div>
+            <div class="form-container">
+                 <!-- Sign In and Back to Home links -->
+            <div class="header-links">
+                <a href="/parentlogin" class="text-decoration-none text-muted">
+                    <i class="fa fa-sign-in-alt"></i> Sign In
+                </a>
+                <a href="/" class="text-decoration-none text-muted">
+                    <i class="fa fa-home"></i> Back to Home
+                </a>
+            </div>
+                <h2>Parent Signup</h2>
+                <form action="/parentregisterform" method="post">
+                    <div class="mb-3">
+                        <label for="firstname" class="form-label">First Name:</label>
+                        <input type="text" id="firstname" name="firstname" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="lastname" class="form-label">Last Name:</label>
+                        <input type="text" id="lastname" name="lastname" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password:</label>
+                        <input type="password" id="password" name="password" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="age" class="form-label">Age:</label>
+                        <input type="number" min="25" id="age" name="age" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="gender" class="form-label">Gender:</label>
+                        <select id="gender" name="gender" class="form-select" required>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="state" class="form-label">State:</label>
+                        <input type="text" id="state" name="state" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn">Register</button>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

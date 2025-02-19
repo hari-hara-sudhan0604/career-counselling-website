@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connected Students</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Remove Extra Space */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Full-Height Background */
+        body {
+            background: whitesmoke;
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: center;
+            color: black;
+            font-family: 'Poppins', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Floating Particle Animation */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            animation: float 5s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-20px) scale(1.2); }
+            100% { transform: translateY(0) scale(1); }
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            width: 100%;
+            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            z-index: 1;
+        }
+
+        /* Main Container */
+        .container {
+            flex: 1;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Glassmorphism Card */
+        .card-container {
+            width: 90%;
+            max-width: 900px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 10px;
+        }
+
+        /* Table Styling */
+        .table {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .table thead {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .table tbody tr:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.02);
+        }
+
+        td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        /* Responsive Tweaks */
+        @media (max-width: 768px) {
+            .card-container {
+                width: 95%;
+            }
+        }
+        body {
+        padding-top: 150px;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        background: #cad2f6;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 8px 40px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        z-index: 2;
+      }
+      .head {
+        text-align: center;
+      }
+      .login-register {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .login-register a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 15px;
+        text-decoration: none;
+        color: black;
+        font-weight: 600;
+        font-size: 18px;
+        cursor: pointer;
+      }
+
+      .login-register a:hover {
+        color: rgb(214, 154, 214);
+      }
+      .nav-icon {
+        height: 24px;
+        width: 24px;
+        margin-bottom: 5px;
+      }
+      footer {
+
+background: linear-gradient(to right, #a8629e, #72a3af);
+
+color: white;
+
+text-align: center;
+
+padding: 30px;
+
+position: fixed;
+
+bottom: 0;
+
+width: 100%;
+
+font-size: 14px;
+
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="d1">
+          <img
+            src="/static/logoo.png"
+            class="logo"
+            height="120px"
+            width="260px"
+            alt="logo"
+          />
+        </div>
+        <div class="head">
+          <h1>Life Coach</h1>
+          <p>Connected Students</p>
+        </div>
+        <div  class="login-register">
+          <a style="background-color: #cad2f6 ;" href="{{ url_for('home') }}">
+            <img src="/static/home.png" alt="Home Icon" class="nav-icon" />
+            Home
+          </a>
+        </div>
+      </header>
+
+    <!-- Floating Particles -->
+    <div class="particles">
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const particleContainer = document.querySelector('.particles');
+                for (let i = 0; i < 30; i++) {
+                    let particle = document.createElement('div');
+                    particle.classList.add('particle');
+                    let size = Math.random() * 5 + 2;
+                    particle.style.width = size + 'px';
+                    particle.style.height = size + 'px';
+                    particle.style.top = Math.random() * 100 + 'vh';
+                    particle.style.left = Math.random() * 100 + 'vw';
+                    particle.style.animationDuration = Math.random() * 5 + 3 + 's';
+                    particleContainer.appendChild(particle);
+                }
+            });
+        </script>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand text-light" href="/lhome">📚 Back to Dashboard</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="card-container">
+            <h2 class="text-center text-light mb-4">Your Connected Students</h2>
+
+            <div class="table-container">
+                <table class="table table-bordered text-light text-center">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for student in students %}
+                        <tr>
+                            <td>{{ student.firstname }} {{ student.lastname }}</td>
+                            <td>{{ student.email }}</td>
+                            <td>
+                                <form action="/disconnectCoach" method="post" style="display:inline;">
+                                    <input type="hidden" name="student_id" value="{{ student.student_id }}">
+                                    <button type="submit" class="btn btn-danger">Disconnect</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>Future Forge|futureforge06@gmail.com</p>
+      </footer>
+</body>
+</html>

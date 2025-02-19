@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentor Registration</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            background:  rgb(233, 184, 93); /* Subtle professional gradient */
+            background-size: 400% 400%;
+            animation: gradientAnimation 8s ease infinite; /* Slower animation for a mature feel */
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            overflow: auto;
+        }
+
+        /* Background animation */
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .form-container h2 {
+            text-align: center;
+            color: #4a6ea9;
+        }
+
+        label {
+            color: #333; /* Ensure labels are visible */
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background-color: #4a6ea9;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #8b9db7;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-control:focus {
+            border-color: #4a6ea9;
+            box-shadow: 0 0 8px rgba(74, 110, 169, 0.6);
+        }
+
+        .alert {
+            margin-bottom: 1rem;
+        }
+
+        .header-links {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .header-links a {
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            color: #4a6ea9;
+        }
+
+        .header-links a:hover {
+            text-decoration: underline;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container col-lg-5">
+        <div class="form-container">
+            
+            <!-- Sign In and Back to Home links -->
+            <div class="header-links">
+                <a href="/login" class="text-decoration-none text-muted">
+                    <i class="fa fa-sign-in-alt"></i> Sign In
+                </a>
+                <a href="/" class="text-decoration-none text-muted">
+                    <i class="fa fa-home"></i> Back to Home
+                </a>
+            </div>
+            
+            <h2>Signup</h2>
+            <!-- Form -->
+            <form method="POST" action="/register">
+                <div class="mb-3">
+                    <label for="firstname" class="form-label">First Name</label>
+                    <input type="text" id="firstname" name="firstname" class="form-control" placeholder="Enter your first name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="lastname" class="form-label">Last Name</label>
+                    <input type="text" id="lastname" name="lastname" class="form-control" placeholder="Enter your last name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required>
+                </div>
+                <div class="mb-3">
+                    <label for="age" class="form-label">Age</label>
+                    <input type="number" id="age" name="age" class="form-control" min="18" max="100" required>
+                </div>
+                <div class="mb-3">
+                    <label for="gender" class="form-label">Gender</label>
+                    <select id="gender" name="gender" class="form-select" required>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="qualification" class="form-label">Qualification</label>
+                    <select id="qualification" name="qualification" class="form-select" required>
+                        <option value="college student">College Student</option>
+                        <option value="bachelor">Bachelor</option>
+                        <option value="masters">Masters</option>
+                        <option value="M.Phill">M.Phill</option>
+                        <option value="Ph.d">Ph.D</option>
+                        <option value="others">Others</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="years_of_experience" class="form-label">Years of Experience</label>
+                    <input type="number" id="years_of_experience" name="years_of_experience" class="form-control" min="0" max="50" required>
+                </div>
+                <div class="mb-3">
+                    <label for="field_of_work" class="form-label">Field of Work</label>
+                    <input type="text" id="field_of_work" name="field_of_work" class="form-control" placeholder="Enter your field of work" required>
+                </div>
+                <div class="mb-3">
+                    <label for="biography" class="form-label">Biography</label>
+                    <textarea id="biography" name="biography" class="form-control" rows="4" minlength="50" placeholder="Write a short biography (at least 50 characters)" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Signup</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

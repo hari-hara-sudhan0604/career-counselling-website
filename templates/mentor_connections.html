@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentor Connections</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header Styles */
+        header {
+            background: #CAD2F6;
+            color: black;
+            padding: 15px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            margin-left: 20px;
+        }
+
+        header .logo img {
+            height: 100px;
+        }
+
+        header h1 {
+            flex: 1;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Footer Styles */
+        footer {
+            background: linear-gradient(to right, #a8629e, #72a3af);
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 14px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* Connection List Styles */
+        .connection-list {
+            margin-top: 20px;
+        }
+
+        .connection-card {
+            margin-bottom: 15px;
+        }
+
+        .btn-disconnect {
+            background-color: #f44336;
+            color: white;
+            border: none;
+        }
+
+        .btn-disconnect:hover {
+            background-color: #d32f2f;
+        }
+
+        .btn-chat {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+
+        .btn-chat:hover {
+            background-color: #45A049;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .alert-info {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-top: 40px;
+        }
+
+        /* Styling for the Back to Dashboard button */
+        .btn-back {
+            background: linear-gradient(to right, #a8629e, #72a3af);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .btn-back:hover {
+            background: linear-gradient(to right, #a8629e, #72a3af);
+            opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <img src="/static/logoo.png" alt="Logo"> <!-- Update with the correct logo path -->
+        </div>
+        <h1>Mentor Connections</h1>
+    </header>
+
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Your Connected Students</h2>
+
+        <div class="connection-list">
+            {% if connections and connections|length > 0 %}
+                {% for connection in connections %}
+                    <div class="card connection-card">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="card-title">{{ connection.firstname }} {{ connection.lastname }}</h5>
+                            </div>
+                            <div>
+                                <form action="/disconnect" method="post" style="display:inline;">
+                                    <input type="hidden" name="student_id" value="{{ connection.student_id }}">
+                                    <input type="hidden" name="mentor_id" value="{{ mentor_id }}">
+                                    <button type="submit" class="btn btn-disconnect">Disconnect</button>
+                                </form>
+                                <button class="btn btn-chat" onclick="openChat('{{ mentor_id }}', '{{ connection.student_id }}')">Chat</button>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="alert alert-info" role="alert">
+                    No connected students yet.
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="{{ url_for('mhome') }}" class="btn btn-back">Back to Dashboard</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Mentor System. All rights reserved. | <a href="/contact">Contact Us</a></p>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function openChat(mentorId, studentId) {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/chat';
+
+            const senderInput = document.createElement('input');
+            senderInput.type = 'hidden';
+            senderInput.name = 'sender_id';
+            senderInput.value = mentorId;
+
+            const receiverInput = document.createElement('input');
+            receiverInput.type = 'hidden';
+            receiverInput.name = 'receiver_id';
+            receiverInput.value = studentId;
+
+            form.appendChild(senderInput);
+            form.appendChild(receiverInput);
+            document.body.appendChild(form);
+            form.submit();
+        }
+    </script>
+
+</body>
+
+</html>

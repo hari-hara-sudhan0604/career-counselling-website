@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competitive Exams for Students</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/toggle.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            padding-top: 150px;
+            font-weight: 300;
+            color: #343a40;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            background: #cad2f6;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 8px 40px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .head {
+            text-align: center;
+        }
+
+        section {
+            padding: 20px;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            animation: slideIn 1s ease-out;
+            background-color: #cad2f6;
+        }
+
+        h2 {
+            color: #004d40;
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            text-transform: capitalize;
+        }
+
+        ul {
+            padding-left: 20px;
+            list-style-type: square;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .highlight {
+            color: #FF5722;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background: linear-gradient(to right, #a8629e, #72a3af);
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        /* Animation Keyframes */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        span , li,p{
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-container">
+        <button class="hamburger btn btn-light">☰</button>
+        <div class="overlay"></div>
+        <nav class="menu">
+            <ul class="list-unstyled">
+                <li><a href="/profile" class="text-decoration-none">Go to Profile</a></li>
+                <li><a href="/home" class="text-decoration-none">Home</a></li>
+                <li><a href="/logout" class="text-decoration-none">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <header class="d-flex flex-column flex-md-row align-items-center">
+        <div>
+            <img src="/static/logoo.png" class="img-fluid" alt="logo" style="height: 120px; width: 260px;">
+        </div>
+        <div class="head mx-auto">
+            <h1>Competitive Exams For Students</h1>
+        </div>
+        <div class="login-register">
+            <a href="{{ url_for('home') }}" class="text-center text-decoration-none d-flex flex-column align-items-center">
+                <img src="/static/home.png" alt="Home Icon" class="nav-icon img-fluid" style="height: 24px; width: 24px;">
+                Home
+            </a>
+        </div>
+    </header>
+
+    <main class="container mt-4">
+        <section>
+        <h2>National Talent Search Examination (NTSE)</h2>
+        <p><span class="highlight">The NTSE</span> is an exam conducted by NCERT for students in class 10. It aims to identify talented students for scholarships. The exam has two stages, and students who perform well are awarded scholarships to pursue higher education in subjects like Science and Social Studies.</p>
+        <ul>
+            <li><strong>Structure:</strong> Two stages: Stage I (state-level) and Stage II (national-level).</li>
+            <li><strong>Eligibility:</strong> Students in class 10 with a minimum of 60% marks in their 9th grade subjects.</li>
+            <li><strong>Scholarship:</strong> Provided based on performance across both stages.</li>
+        </ul>
+    </section>
+        <section>
+            <h2>National Level Science Talent Search Examination (NSTSE)</h2>
+            <p><span class="highlight">NSTSE</span> is an exam focusing on Mathematics and Science for students from class 2 to 12. It helps students improve their conceptual understanding through a more analytical approach.</p>
+            <ul>
+                <li><strong>Eligibility:</strong> Open to students from class 2 to 12.</li>
+                <li><strong>Subjects:</strong> Mathematics and General Science.</li>
+                <li><strong>Awards:</strong> Cash prizes, medals, and certificates for top performers.</li>
+            </ul>
+        
+        </section>
+        <section>
+            <h2>Indian National Olympiad (INO)</h2>
+            <p><span class="highlight">INO</span> is an Olympiad aimed at recognizing students with exceptional talent in subjects like Physics, Chemistry, Biology, and Junior Science.</p>
+            <ul>
+                <li><strong>Eligibility:</strong> Students in grades 8 to 10.</li>
+                <li><strong>Stages:</strong> Includes various stages, from National Standard Examination (NSE) to participation in the International Olympiad.</li>
+                <li><strong>Purpose:</strong> Encourages intellectual competition and provides educational camps for selected students.</li>
+            </ul>
+        </section>
+        
+        <section>
+            <h2>Science Olympiad Foundation (SOF)</h2>
+            <p><span class="highlight">SOF</span> organizes multiple Olympiads in Science, Mathematics, English, and Computer Science for students to improve their logical reasoning and problem-solving abilities.</p>
+            <ul>
+                <li><strong>Competitions:</strong> National Science Olympiad (NSO), International English Olympiad (IEO), International Mathematics Olympiad (IMO), National Cyber Olympiad (NCO), and more.</li>
+                <li><strong>Levels:</strong> Competitions are conducted at school, zonal, state, and international levels.</li>
+                <li><strong>Prizes:</strong> Cash rewards, gifts, and scholarships.</li>
+            </ul>
+        </section>
+        
+        <section>
+            <h2>GeoGenius Geography Exam</h2>
+            <p><span class="highlight">GeoGenius</span> is a geography competition where students from class 2 to 12 can participate and showcase their knowledge about the world.</p>
+            <ul>
+                <li><strong>Eligibility:</strong> Open to students from class 2 to 12.</li>
+                <li><strong>International Recognition:</strong> Winners can represent India at the International Geography Olympiad.</li>
+                <li><strong>Awards:</strong> Prizes and recognition at national and international levels.</li>
+            </ul>
+        </section>
+        
+        <section>
+            <h2>Kishore Vaigyanik Protsahan Yojana (KVPY)</h2>
+            <p><span class="highlight">KVPY</span> is a prestigious exam encouraging students to pursue research in science, engineering, and medicine.</p>
+            <ul>
+                <li><strong>Eligibility:</strong> Class 11 (SA stream) and Class 12 (SX stream) students.</li>
+                <li><strong>Selection Process:</strong> Includes an aptitude test and a personal interview.</li>
+                <li><strong>Fellowships:</strong> Awarded to top candidates to support their higher education in science.</li>
+            </ul>
+        </section>
+        
+        <!-- Add other sections similarly -->
+    </main>
+
+    <footer>
+        <p>Future Forge | futureforge06@gmail.com</p>
+    </footer>
+
+    <script src="/static/toggle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mentor Login</title>
+    <style>
+        /* Basic styling for better presentation */
+        body { font-family: Arial, sans-serif; background-color: #f2f2f2; }
+        .container { width: 400px; margin: auto; padding: 20px; background-color: white; margin-top: 50px; border-radius: 5px; }
+        input[type=email], input[type=password] {
+            width: 100%; padding: 12px; margin: 8px 0; box-sizing: border-box;
+        }
+        button { background-color: #4CAF50; color: white; padding: 12px; border: none; width: 100%; }
+        .alert { padding: 10px; background-color: #f44336; color: white; margin-bottom: 15px; }
+        .success { background-color: #4CAF50; }
+        .info { background-color: #2196F3; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Mentor Login</h2>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert {{ category }}">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        <form method="POST" action="/mlogin">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a href="/register">Register here</a>.</p>
+    </div>
+</body>
+</html>

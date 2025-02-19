@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future Forge - Home</title>
+
+    <!-- Fonts -->    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/toggle.css">
+    <!-- Styles -->
+    <style>
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+      }
+      html,body{
+          height: 100%;
+      }
+      /* General Styles */
+      body {
+          display: flex;
+          flex-direction: column;
+          padding-top: 150px;
+          font-family: "Roboto", sans-serif;
+          font-weight: 300;
+          color: #333;
+          background-image: url('/static/6mem.jpg');
+          background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+        
+      }
+
+      /* Header Styles */
+      header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          background:rgb(238, 229, 234);
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          padding: 5px 40px;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      
+      .d2 {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          margin-left: 170px;
+      }
+
+      .d2 h2 {
+          color: black;
+          font-family: 'Playfair Display', serif;
+          font-size: 36px;
+      }
+
+      .title1 {
+          color: black;
+          font-size: 18px;
+          font-weight: 500;
+      }
+
+      /* Navigation Links */
+      .login-register {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+      }
+
+      .login-register a {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin: 0 15px;
+          text-decoration: none;
+          color: black;
+          font-weight: 600;
+          font-size: 18px;
+          cursor: pointer;
+      }
+
+      .login-register a:hover {
+          color: rgb(214, 154, 214);
+      }
+
+      .nav-icon {
+          height: 24px;
+          width: 24px;
+          margin-bottom: 5px;
+      }
+
+      /* Dropdown Menu */
+      .dropdown-container {
+          display: flex;
+          justify-content: center;
+          margin-top: 30px;
+          gap: 20px;
+      }
+
+      .dropdown button {
+  background-color: #ebf2f4; /* Light blue background */
+  color: black; /* Text color */
+  padding: 12px 24px; /* Button padding */
+  border: 6px solid transparent; /* Invisible border by default */
+  border-radius: 25px; /* Rounded corners */
+  font-weight: bold; /* Bold text */
+  cursor: pointer; /* Pointer cursor */
+  font-size: 18px; /* Font size */
+ 
+ 
+      }
+
+.dropdown button:hover,
+.dropdown button:focus {
+  border-color: darkviolet /* Darker blue border when hovered or focused */
+}
+
+
+      
+
+      .dropdown-content {
+          display: none;
+          position: absolute;
+          background-color: white;
+          min-width: 200px;
+          box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+          border-radius: 8px;
+          z-index: 1;
+      }
+
+      .dropdown-content a {
+          color: black;
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+          transition: background-color 0.3s ease;
+      }
+
+      .dropdown-content a:hover {
+          background-color: #f4f4f9;
+      }
+
+      .dropdown:hover .dropdown-content {
+          display: block;
+      }
+
+     
+
+      .home-image {
+          border-radius: 50%;
+          margin-bottom: 20px;
+      }
+
+      /* Footer Styles */
+      footer {
+          text-align: center;
+          padding: 1rem;
+          background: linear-gradient(to right, #a8629e, #72a3af);
+          color: white;
+          font-size: 0.9rem;
+         margin-top: auto;
+         
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 768px) {
+          header {
+              flex-direction: column;
+              text-align: center;
+          }
+
+          .d1,
+          .d2,
+          .login-register {
+              margin-bottom: 20px;
+          }
+      }
+
+     
+      .heading {
+  flex: 1; /* Pushes the footer to the bottom if no content is present */
+}
+.card {
+  background-color: white; /* White background with 50% transparency */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  padding: 20px; /* Inner spacing */
+ margin-top: 200px;
+  margin-right:110px; /* Outer spacing */
+  width: 500px;/* Fixed width */
+  color: black; /* Ensure text is readable */
+}
+.card p {
+  margin: 0;
+  line-height: 1.5; 
+  font-style: oblique;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;/* Remove default margin for text */
+}
+.card h3{
+  text-align: center;
+  line-height: 1.8;
+  font-style: italic;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+
+.card-container {
+  display: flex; 
+  justify-content: flex; /* Move cards to the left */
+  align-items: flex; /* Adjust vertical alignment */
+  flex-wrap: wrap; 
+  gap: 30px; /* Adjust spacing between cards */
+  padding: 30px; /* Increase space around the container */
+  margin-left: 150px;/* Moves the entire card container downward */
+}
+  .scalable-text {
+    font-size: 1rem; /* Base font size */
+  }
+  .controls {
+    margin: 20px 0;
+  }
+  .controls button {
+    padding: 10px 15px;
+    margin-right: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  /*chart and image*/
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .chart-container {
+    flex: 1;
+    max-width: 45%;
+    text-align: center;
+  }
+  .chart-container img {
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+  }
+  .content-container {
+    flex: 1;
+    max-width: 45%;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  .content-container h2 {
+    color: #2c3e50;
+  }
+  .content-container p {
+    line-height: 1.6;
+    color: #34495e;
+  }
+       
+        .container2 {
+            max-width: 800px;
+            margin: 100px auto 100px auto; /* Adjust for fixed header */
+            padding: 20px;
+            text-align: center;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            flex: 1; /* Allow the container to stretch and push footer down */
+        }
+
+        h1 {
+            color: rgb(83, 54, 80) ;
+        }
+
+        p {
+            margin: 20px 0;
+        }
+
+        .contact {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .email {
+            color: #3182ce;
+            text-decoration: none;
+        }
+
+        .email:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="menu-container">
+        <!-- Hamburger Button -->
+        <button class="hamburger">☰</button>
+    
+        <!-- Overlay -->
+        <div class="overlay"></div>
+    
+        <!-- Dropdown Menu -->
+        <nav class="menu">
+          <ul>
+            <li><a href="/dashboard">dashboard</a></li>
+            <li><a href="#home-section">Home</a></li>
+            <li><a href="#about-section">About Us</a></li>
+           
+            <li><a href="/adminlogin">Logout</a></li>
+          </ul>
+        </nav>
+      </div>
+
+    <!-- Header -->
+    <header>
+        <div class="d1">
+            <img src="/static/logoo.png" class="logo" height="120px" width="260px" alt="logo">
+        </div>
+        <center> <div class="controls">
+            <button onclick="toggleScreenReader()" id="screenReaderButton">Start Screen Reader</button>
+            <button onclick="changeFontSize(1)">Increase Text Size</button>
+            <button onclick="changeFontSize(-1)">Decrease Text Size</button>
+            <button onclick="resetFontSize()">Reset Text Size</button>
+          </div>
+        </center>
+        <div class="login-register">
+            <a href="#home-section">
+                <img src="/static/home.png" alt="Home Icon" class="nav-icon">
+                Home
+            </a>
+            <a href="#about-section">
+                <img src="/static/about.png" alt="About Icon" class="nav-icon">
+                About
+            </a>
+           
+        </div>
+    </header>
+    <section id="home-section">
+    <div class="heading">
+    <div class="dropdown-container">
+        <div class="dropdown">
+            <button>Grade 6-8</button>
+            <div class="dropdown-content">
+                <a href="{{ url_for('assessment') }}">Assessment</a>
+                <a href=" {{ url_for('skillcourses') }}">Skill Courses</a>
+                <a href="{{ url_for('exams') }}">Exams</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button>Grade 9-10</button>
+            <div class="dropdown-content">
+                <a href="{{ url_for('mentorpage') }}">Mentor</a>
+                <a href="{{ url_for('groups') }}">Groups</a>
+                <a href="{{ url_for('diploma') }}">Diploma</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button>Grade 11-12</button>
+            <div class="dropdown-content">
+                <a href="{{ url_for('mentorpage') }}">Mentor</a>
+                <a href="{{ url_for('courses') }}">Courses</a>
+                <a href="{{ url_for('lifecoach') }}">Life Coach</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button > <a style="text-decoration: none; color:black;" href="{{url_for('diploma') }}">Diploma </a></button> 
+        </div>
+    </div>
+</div>
+<!-- Main Content -->
+<main class="scalable-text">
+    <div class="card-container">
+        <div class="card">
+            
+            <h3>Why Choose Future Forge?</h3>
+            <p><strong>Tailored Career Guidance:</strong> Every student is unique, and so is our approach. We provide personalized recommendations that align with your goals and aspirations.</p>
+            <p><strong>Aligned with NEP 2020:</strong> Supporting India’s National Education Policy, Future Forge focuses on holistic development and exposure to diverse career opportunities.</p>
+            <p><strong>Explore Beyond the Usual:</strong> From conventional professions to vocational and emerging fields, we help you discover what truly resonates with you.</p>
+            <p><strong>AI-Driven Assessments:</strong> Our intelligent algorithms analyze your strengths and interests to suggest careers that fit you best.</p>
+            <p><strong>Expert Mentorship:</strong> Learn from industry leaders who guide you through your journey, helping you make informed career choices.</p>
+        </div>
+        <div class="card">
+           
+                <h3>NEP 2020 Alignment with Future Forge</h3>
+                <p><strong>Holistic Development:</strong> Future Forge integrates NEP's focus on overall personality growth by assessing students’ interests, strengths, and traits, providing personalized guidance to nurture their unique potential.</p>
+    
+                <p><strong>Exploration of Diverse Careers:</strong> Embracing NEP’s encouragement of vocational education, Future Forge helps students explore non-traditional careers, from AI and data science to entrepreneurship, challenging the notion of “one-size-fits-all” professions.</p>
+    
+                <p><strong>Personalized Learning Paths:</strong> Just as NEP promotes individualized learning, Future Forge uses AI-driven assessments to offer career recommendations tailored to each student's goals and preferences.</p>
+    
+         </div>
+    </div>  
+
+    <!-- Home Section -->
+    <br><br><br><br>
+    <div class="container">
+        <div class="chart-container">
+          <img src="/static/chart.png" alt="chart">
+        </div>
+        <div class="content-container">
+          <h2>The Importance of Career Guidance in India</h2>
+          <p>
+            In India, only 1 in 5 students receives proper career counseling, leading many, especially in rural areas, to be unaware of diverse career opportunities. Students often rely on traditional career paths like engineering and medicine, missing out on emerging fields like AI, data science, and renewable energy.
+          </p>
+          <p>
+            Career guidance is crucial for students to make informed decisions about their future. It helps them align their interests, skills, and personality traits with suitable career paths, reducing dropout rates and increasing motivation. Career counseling empowers students to explore non-traditional careers and bridge skill gaps, leading to better job prospects.
+          </p>
+          <p>
+            By providing clear advice on necessary skills and qualifications, career guidance prepares students for the demands of the job market. It also fosters vocational education, which is essential to address India’s skill shortage.
+          </p>
+          <p>
+            At Future Forge, we aim to provide students with the tools and resources to make informed career decisions, empowering them to build fulfilling futures.
+          </p>
+        </div>
+      </div>
+      <div class="container">
+        
+        <div class="content-container">
+          <h2>Job Statistics</h2>
+          <p>
+            By providing clear advice on necessary skills and qualifications, career guidance prepares students for the demands of the job market. It also fosters vocational education, which is essential to address India’s skill shortage.
+          </p>
+          <p>
+            At Future Forge, we aim to provide students with the tools and resources to make informed career decisions, empowering them to build fulfilling futures.
+          </p>
+        </div>
+        <div class="chart-container">
+            <img src="/static/piechart.png" alt="chart">
+          </div>
+      </div>
+     
+
+<center> 
+    <h2>How do you explore non traditional courses</h2><img src="/static/flow chart.jpg" alt="flowchart" width="800px" height="800px">
+</center> 
+</section>
+<section id="about-section"> 
+<div class="container2">
+  <h1>About Us</h1>
+  <p>We are a team of 6 professionals dedicated to helping you discover your career and make your life easier.</p>
+  <p>For further enquiries, feel free to reach out to us at:</p>
+  <p class="contact">
+      <a href="mailto:FutureForge06@gmail.com" class="email">FutureForge06@gmail.com</a>
+  </p>
+</div>
+</section>
+</main>
+    <!-- Footer -->
+    <footer>
+        <p>Future Forge | futureforge06@gmail.com</p>
+    </footer>
+
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const menu = document.querySelector('.menu');
+        const overlay = document.querySelector('.overlay');
+    
+        // Toggle menu visibility
+        hamburger.addEventListener('click', () => {
+          menu.classList.toggle('open');
+          overlay.classList.toggle('active');
+        });
+    
+        // Close menu when clicking on the overlay
+        overlay.addEventListener('click', () => {
+          menu.classList.remove('open');
+          overlay.classList.remove('active');
+        });
+        let baseFontSize = 16; // Default font size in pixels
+        let speechSynthesis = window.speechSynthesis; // Speech API
+        let utterance;
+        let isReading = false; // Flag to track reading state
+    
+        function changeFontSize(change) {
+          baseFontSize += change;
+          document.querySelector('.scalable-text').style.fontSize = `${baseFontSize}px`;
+        }
+    
+        function resetFontSize() {
+          baseFontSize = 16;
+          document.querySelector('.scalable-text').style.fontSize = `${baseFontSize}px`;
+        }
+    
+        function toggleScreenReader() {
+          const button = document.getElementById('screenReaderButton');
+          if (isReading) {
+            // Stop reading
+            if (speechSynthesis.speaking) {
+              speechSynthesis.cancel();
+            }
+            button.textContent = 'Start Screen Reader';
+            isReading = false;
+          } else {
+            // Start reading
+            const textContent = document.body.innerText;
+            utterance = new SpeechSynthesisUtterance(textContent);
+            utterance.lang = 'en-US';
+            speechSynthesis.speak(utterance);
+            button.textContent = 'Stop Screen Reader';
+            isReading = true;
+          }
+        }
+      </script>
+
+</body>
+
+</html>
